@@ -1,0 +1,43 @@
+# client
+client/node_modules/
+client/.next/
+client/out/
+client/dist/
+client/public/
+
+# server
+server/node_modules/
+server/dist/
+server/build/
+
+# design
+.design/
+update/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.*
+server/.env
+client/.env
+
+# IDE
+.vscode/
+.idea/
+
+# System
+.DS_Store
+Thumbs.db
+
+# Cache
+.cache/
+.parcel-cache/
+.eslintcache
+info.md
+update/jules_session_15990345545788292333.zip
