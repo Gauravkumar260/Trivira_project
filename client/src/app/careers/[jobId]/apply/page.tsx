@@ -1,151 +1,141 @@
 /**
- * Filename: app/careers/[jobId]/page.tsx
- * Description: Job details page matching Trivira design
- * Author: Alex
+ * Filename: app/careers/[jobId]/apply/page.tsx
+ * Description: Job Application Form styled to match 'Join our Enterprise' design.
+ * Integrates dynamically with jobsData.ts.
+ * Author: Lead Engineer
  */
 
 import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { jobs } from '@/app/data/jobsData';
+import { Input, Label, Select, Textarea, Button } from '@/components/ui';
 
 interface Props {
   params: Promise<{ jobId: string }>;
 }
 
-const JobDetails = async ({ params }: Props) => {
+const ApplyPage = async ({ params }: Props) => {
   const { jobId } = await params;
-  const job = jobs.find((j) => j.id === jobId);
+  
+  // Find the specific job the user clicked on
+  const currentJob = jobs.find((j) => j.id === jobId);
 
-  if (!job) return notFound();
+  if (!currentJob) return notFound();
 
   return (
-    <div className="w-full font-sans bg-[#FFF9F5] min-h-screen">
+    <div className="w-full font-sans bg-[#FFF9F5] min-h-screen flex flex-col items-center justify-start py-16 px-4">
       
-      {/* Hero Header */}
-      <div className="w-full bg-white border-b border-gray-200 py-12 md:py-16 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2D5F3F] mb-4">
-            Join our Enterprise
-          </h1>
-          <p className="text-base md:text-lg text-gray-600">
-            Grow With Us, Build Wellness for All.<br />
-            we're also building a global team.
-          </p>
-        </div>
+      {/* Header Section */}
+      <div className="text-center mb-10">
+        <h1 className="text-3xl font-semibold text-[#2F3A4B] mb-2">
+          Join our Enterprise
+        </h1>
+        <p className="text-gray-500 text-sm">
+          Grow With Us, Build Wellness for All
+        </p>
       </div>
 
-      {/* Job Details Content */}
-      <div className="max-w-5xl mx-auto px-6 py-12 md:py-16">
-        
-        {/* Job Title and Location */}
-        <div className="mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-[#2D5F3F] mb-2">
-            Job Description – {job.title}
-          </h2>
-          <p className="text-gray-600">
-            {job.location}
-          </p>
-        </div>
+      {/* Navigation Context */}
+      <div className="w-full max-w-2xl mb-4">
+        <Link href={`/careers/${jobId}`} className="text-sm text-gray-400 hover:text-[#2D5F3F] flex items-center gap-1 transition-colors">
+          <span>←</span> Back to Job Description
+        </Link>
+      </div>
 
-        {/* About Trivira Nutraceuticals */}
-        <section className="mb-8">
-          <h3 className="text-xl md:text-2xl font-bold text-[#2D5F3F] mb-4">
-            About Trivira Nutraceuticals
-          </h3>
-          <p className="text-gray-700 leading-relaxed">
-            At Trivira Nutraceuticals, we're on a mission to bring plant-based proteins, functional mushrooms, and natural wellness products to every Indian household. Founded with the vision of blending tradition with modern science, we create premium nutrition solutions that nurture health and sustain nature. As we grow, we're looking for passionate individuals to join our journey.
-          </p>
-        </section>
-
-        {/* Role Overview */}
-        <section className="mb-8">
-          <h3 className="text-xl md:text-2xl font-bold text-[#2D5F3F] mb-4">
-            Role Overview
-          </h3>
-          <p className="text-gray-700 leading-relaxed mb-4">
-            {job.description}
-          </p>
-        </section>
-
-        {/* What you'll do */}
-        <section className="mb-8">
-          <h3 className="text-xl md:text-2xl font-bold text-[#2D5F3F] mb-4">
-            What you'll do:
-          </h3>
-          <ul className="list-disc pl-6 space-y-2 text-gray-700">
-            {job.responsibilities && job.responsibilities.map((resp, i) => (
-              <li key={i}>{resp}</li>
-            ))}
-          </ul>
-        </section>
-
-        {/* What will help you succeed */}
-        <section className="mb-8">
-          <h3 className="text-xl md:text-2xl font-bold text-[#2D5F3F] mb-4">
-            What will help you succeed:
-          </h3>
-          <div className="mb-4">
-            <h4 className="font-semibold text-gray-800 mb-2">Must-haves:</h4>
-            <ul className="list-disc pl-6 space-y-2 text-gray-700">
-              {job.requirements.map((req, i) => (
-                <li key={i}>{req}</li>
-              ))}
-            </ul>
+      {/* Form Container */}
+      <div className="w-full max-w-2xl">
+        {/* Note: In a real app, wrap this in a Server Action or use a client component handler */}
+        <form className="space-y-5">
+          
+          {/* Row 1: Names */}
+          <div className="space-y-2">
+             <Label htmlFor="firstName" required>First name:</Label>
+             <Input type="text" id="firstName" name="firstName" placeholder="First name" required />
           </div>
-        </section>
 
-        {/* Benefits */}
-        {job.benefits && (
-          <section className="mb-8">
-            <h3 className="text-xl md:text-2xl font-bold text-[#2D5F3F] mb-4">
-              Benefits:
-            </h3>
-            <ul className="list-disc pl-6 space-y-2 text-gray-700">
-              {job.benefits.map((benefit, i) => (
-                <li key={i}>{benefit}</li>
+          <div className="space-y-2">
+             <Label htmlFor="lastName" required>Last name:</Label>
+             <Input type="text" id="lastName" name="lastName" placeholder="Last name" required />
+          </div>
+
+          {/* Row 2: Email */}
+          <div className="space-y-2">
+            <Label htmlFor="email" required>Email</Label>
+            <Input type="email" id="email" name="email" placeholder="Your email" required />
+          </div>
+
+          {/* Row 3: Phone */}
+          <div className="space-y-2">
+            <Label htmlFor="phone">Phone:</Label>
+            <Input type="tel" id="phone" name="phone" placeholder="Phone" />
+          </div>
+
+          {/* Row 4: Education */}
+          <div className="space-y-2">
+            <Label htmlFor="education" required>Last Education:</Label>
+            <Input type="text" id="education" name="education" placeholder="Education" required />
+          </div>
+
+          {/* Row 5: Experience */}
+          <div className="space-y-2">
+            <Label htmlFor="experience" required>Experience:</Label>
+            <Input type="text" id="experience" name="experience" placeholder="In Years" required />
+          </div>
+
+          {/* Row 6: Position Select - Dynamic Integration */}
+          <div className="space-y-2">
+            <Label htmlFor="position">Position You're Looking :</Label>
+            <Select 
+              id="position" 
+              name="position"
+              defaultValue={currentJob.title} 
+            >
+              {/* Dynamically map all available jobs from data */}
+              {jobs.map((job) => (
+                <option key={job.id} value={job.title}>
+                  {job.title}
+                </option>
               ))}
-            </ul>
-          </section>
-        )}
+              <option value="Other">Other</option>
+            </Select>
+          </div>
 
-        {/* How to Apply */}
-        <section className="mb-8">
-          <h3 className="text-xl md:text-2xl font-bold text-[#2D5F3F] mb-4">
-            How to Apply:
-          </h3>
-          <p className="text-gray-700 leading-relaxed mb-4">
-            Send your resume and a brief note about why you'd like to join us at <span className="font-semibold text-[#2D5F3F]">careers@trivira.com</span>.
-          </p>
-          <p className="text-gray-700 leading-relaxed mb-6">
-            Be part of a movement that nurtures health and sustains nature.
-          </p>
-          <p className="text-gray-700 leading-relaxed font-semibold">
-            Thank you!
-          </p>
-        </section>
+          {/* Row 7: Cover Letter */}
+          <div className="space-y-2">
+            <Label htmlFor="coverLetter">Cover Letter:</Label>
+            <Textarea id="coverLetter" name="coverLetter" rows={6}></Textarea>
+          </div>
 
-        {/* Apply Button */}
-        <div className="flex flex-col sm:flex-row gap-4 items-center justify-center mt-12">
-          <Link 
-            href={`/careers/${job.id}/apply`}
-            className="bg-[#2D5F3F] text-white font-semibold text-base px-8 py-3 rounded-md hover:bg-[#234A32] transition-all flex items-center gap-2"
+          {/* Row 8: Upload Resume */}
+          <div className="space-y-2 pt-2">
+            <Label>Upload your Updated Resume :</Label>
+            <div className="relative">
+              <input type="file" id="resume" name="resume" className="hidden" accept=".pdf,.doc,.docx" />
+              <label 
+                htmlFor="resume" 
+                className="flex items-center justify-center w-full bg-[#EFF2FF] hover:bg-[#E0E7FF] text-[#5A6B8C] py-4 rounded-[4px] cursor-pointer transition-colors border border-[#DAE0F2]"
+              >
+                <span>Upload Resume</span>
+                {/* Upload Icon */}
+                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
+              </label>
+            </div>
+          </div>
+
+          {/* Submit Button */}
+          <Button 
+            type="submit" 
+            variant="primary"
+            className="w-full rounded-[4px] mt-6 shadow-sm"
           >
-            Apply for Job
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-            </svg>
-          </Link>
-          <Link 
-            href="/careers" 
-            className="text-gray-600 hover:text-[#2D5F3F] underline text-sm"
-          >
-            Back to all jobs
-          </Link>
-        </div>
+            Submit
+          </Button>
+
+        </form>
       </div>
     </div>
   );
 };
 
-export default JobDetails;
+export default ApplyPage;

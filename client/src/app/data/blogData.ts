@@ -9,13 +9,21 @@ export interface BlogPost {
   content: string; // HTML content for the article
 }
 
+const assets = {
+  blogs: {
+    functionalMushrooms: "/assets/images/functional-mushrooms.svg",
+    stevia: "/assets/images/stevia.svg",
+    plantBasedProtein: "/assets/images/plant-based-protein.svg",
+  }
+};
+
 export const blogPosts: BlogPost[] = [
   {
     id: "functional-mushrooms",
     title: "Functional Mushrooms",
     subtitle: "Ancient Wisdom for Modern Health",
     desc: "Discover how Reishi, Lion’s Mane and Cordyceps harness ancient wisdom to boost immunity, energy, and focus.",
-    image: "https://images.unsplash.com/photo-1595123550441-d377e017de6a?q=80&w=2000&auto=format&fit=crop", 
+    image: assets.blogs.functionalMushrooms, 
     readTime: "6 min read",
     date: "Oct 12, 2024",
     content: `
@@ -37,7 +45,7 @@ export const blogPosts: BlogPost[] = [
     title: "Stevia",
     subtitle: "The Natural Sweetness Revolution",
     desc: "A zero-calorie, plant-based alternative to sugar that supports weight management and is safe for diabetics.",
-    image: "https://images.unsplash.com/photo-1628163749774-c5a4d952613d?q=80&w=2000&auto=format&fit=crop", 
+    image: assets.blogs.stevia, 
     readTime: "4 min read",
     date: "Oct 15, 2024",
     content: `
@@ -52,7 +60,7 @@ export const blogPosts: BlogPost[] = [
     title: "Plant-Based Protein",
     subtitle: "Fuel Your Body Cleanly",
     desc: "Clean, delicious, and packed with amino acids — supporting muscle recovery, energy, and overall wellness.",
-    image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=2000&auto=format&fit=crop", 
+    image: assets.blogs.plantBasedProtein, 
     readTime: "6 min read",
     date: "Oct 20, 2024",
     content: `

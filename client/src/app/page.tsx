@@ -21,59 +21,59 @@ import Testimonials from '@/components/shared/Testimonials';
 
 const assets = {
   mascots: {
-    lionMane: "/assets/images/1 2.svg",
-    cordyceps: "/assets/images/2 2.svg",
-    reishi: "/assets/images/3 2.svg",
-    spirulina: "/assets/images/4 2.svg",
-    chlorella: "/assets/images/5 2.svg",
-    monkFruit: "/assets/images/5 3.svg",
-    stevia: "/assets/images/1 3.svg",
+    lionMane: "/assets/images/mascot-lion-mane.svg",
+    cordyceps: "/assets/images/mascot-cordyceps.svg",
+    reishi: "/assets/images/mascot-reishi.svg",
+    spirulina: "/assets/images/mascot-spirulina.svg",
+    chlorella: "/assets/images/mascot-chlorella.svg",
+    monkFruit: "/assets/images/mascot-monk-fruit.svg",
+    stevia: "/assets/images/mascot-stevia.svg",
   },
   icons: {
-    iso: "/assets/images/Mask group.svg",
-    fda: "/assets/images/Mask group (1).svg",
-    nonGmo: "/assets/images/Mask group (2).svg",
-    haccp: "/assets/images/Mask group (3).svg",
-    gmp: "/assets/images/Mask group (4).svg",
-    focus: "/assets/images/Vector (9).svg",
-    energy: "/assets/images/Vector (10).svg",
-    calm: "/assets/images/Vector (11).svg",
-    heart: "/assets/images/Vector (12).svg",
-    heartPlus: "/assets/images/Vector (8).svg",
-    weight: "/assets/images/Vector (5).svg",
-    stomach: "/assets/images/Group (2).svg",
-    puzzle: "/assets/images/Vector (7).svg",
-    body: "/assets/images/healthicons_autoimmune-disease.svg",
-    drop: "/assets/images/Vector (4).svg",
-    metabolism: "/assets/images/Vector (6).svg",
-    gelatinFree: "/assets/images/Group 3.svg",
-    glutenFree: "/assets/images/Group 3 (1).svg",
-    nonGmoBadge: "/assets/images/Group 3 (2).svg",
-    soyFree: "/assets/images/Group 3 (3).svg",
-    vegan: "/assets/images/Group 3 (4).svg",
+    iso: "/assets/images/icon-iso.svg",
+    fda: "/assets/images/icon-fda.svg",
+    nonGmo: "/assets/images/icon-non-gmo.svg",
+    haccp: "/assets/images/icon-haccp.svg",
+    gmp: "/assets/images/icon-gmp.svg",
+    focus: "/assets/images/icon-focus.svg",
+    energy: "/assets/images/icon-energy.svg",
+    calm: "/assets/images/icon-calm.svg",
+    heart: "/assets/images/icon-heart.svg",
+    heartPlus: "/assets/images/icon-heart-plus.svg",
+    weight: "/assets/images/icon-weight.svg",
+    stomach: "/assets/images/icon-stomach.svg",
+    puzzle: "/assets/images/icon-puzzle.svg",
+    body: "/assets/images/icon-body.svg",
+    drop: "/assets/images/icon-drop.svg",
+    metabolism: "/assets/images/icon-metabolism.svg",
+    gelatinFree: "/assets/images/badge-gelatin-free.svg",
+    glutenFree: "/assets/images/badge-gluten-free.svg",
+    nonGmoBadge: "/assets/images/badge-non-gmo.svg",
+    soyFree: "/assets/images/badge-soy-free.svg",
+    vegan: "/assets/images/badge-vegan.svg",
   },
   products: {
-    protein: "/assets/images/OUR (3).svg",
-    mushroom: "/assets/images/OUR (2).svg",
-    stevia: "/assets/images/OUR (1).svg",
+    protein: "/assets/images/product-protein.svg",
+    mushroom: "/assets/images/product-mushroom.svg",
+    stevia: "/assets/images/product-stevia.svg",
   },
   slides: {
-    lionMane: "/assets/images/Mushroom (7).svg",
-    cordyceps: "/assets/images/Mushroom (6).svg",
-    reishi: "/assets/images/Mushroom (5).svg",
-    spirulina: "/assets/images/Mushroom (4).svg",
-    chlorella: "/assets/images/Mushroom (3).svg",
-    monkFruit: "/assets/images/Mushroom (2).svg",
-    stevia: "/assets/images/Mushroom (1).svg",
+    lionMane: "/assets/images/slide-lion-mane.svg",
+    cordyceps: "/assets/images/slide-cordyceps.svg",
+    reishi: "/assets/images/slide-reishi.svg",
+    spirulina: "/assets/images/slide-spirulina.svg",
+    chlorella: "/assets/images/slide-chlorella.svg",
+    monkFruit: "/assets/images/slide-monk-fruit.svg",
+    stevia: "/assets/images/slide-stevia.svg",
   },
   extras: {
-    confetti: "/assets/images/fxemoji_partypopper.svg",
-    founder: "/assets/images/STORY.svg",
+    confetti: "/assets/images/confetti.svg",
+    founder: "/assets/images/founder.svg",
     partners: [
-      "/assets/images/amazon-logo.svg",   
-      "/assets/images/meesho-logo.svg",   
-      "/assets/images/flipkart-logo.svg", 
-      "/assets/images/indiamart-logo.svg"
+      "/assets/images/partner-amazon.svg",   
+      "/assets/images/partner-meesho.svg",   
+      "/assets/images/partner-flipkart.svg", 
+      "/assets/images/partner-indiamart.svg"
     ]
   }
 };
@@ -318,7 +318,7 @@ const Home: React.FC = () => {
           
           <header className="flex flex-col w-full max-w-[1234px] gap-4 items-center justify-center text-center">
             <h1 className="font-sans font-bold text-[#3f8133] text-3xl md:text-[32px] leading-none tracking-[0%]">
-              What's your Benefits?
+              What&apos;s your Benefits?
             </h1>
             <p className="font-rubik text-[#086938] text-lg md:text-xl leading-[26.4px] tracking-[-0.44px] max-w-[800px]">
               Our daily superfood mushroom tablets offer unique health benefits that

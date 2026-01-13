@@ -9,7 +9,7 @@ interface ProductCardProps {
 
 /**
  * ProductCard Component - Trivira Design
- * Clean white cards with product images, ratings, and themed action buttons
+ * Matches exact visual specs: Dynamic border colors, Brand Green stars, Clean white layout
  */
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const handleAddToCart = () => {
@@ -19,7 +19,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const displayName = product.name || product.title || 'Product';
   const displaySubtitle = product.subtitle || product.category || '';
   
-  // Render star rating with proper styling
+  // Use theme color for border, defaulting to gray if not specified
+  const borderColor = product.themeColor || '#E5E7EB';
+
+  // Render star rating - Using Brand Green #3F8133 to match design images
   const renderStars = () => {
     const rating = product.rating || 0;
     const fullStars = Math.floor(rating);
@@ -30,7 +33,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <div className="flex items-center gap-0.5">
         {/* Full stars */}
         {[...Array(fullStars)].map((_, i) => (
-          <svg key={`full-${i}`} className="w-4 h-4 md:w-5 md:h-5 fill-current text-yellow-400" viewBox="0 0 20 20">
+          <svg key={`full-${i}`} className="w-4 h-4 md:w-5 md:h-5 fill-current text-[#3F8133]" viewBox="0 0 20 20">
             <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
           </svg>
         ))}
@@ -39,7 +42,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <svg className="w-4 h-4 md:w-5 md:h-5" viewBox="0 0 20 20">
             <defs>
               <linearGradient id={`half-star-${product.id}`}>
-                <stop offset="50%" stopColor="#FBBF24"/>
+                <stop offset="50%" stopColor="#3F8133"/>
                 <stop offset="50%" stopColor="#D1D5DB"/>
               </linearGradient>
             </defs>
@@ -57,44 +60,44 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
 
   return (
-    <div className="flex flex-col w-full max-w-[320px] bg-white rounded-2xl border-2 border-gray-200 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-      {/* Product Image Container */}
-      <div 
-        className="w-full h-[220px] md:h-[260px] flex items-center justify-center p-8"
-        style={{ backgroundColor: product.bgImage || '#F5E6D3' }}
-      >
+    <div 
+      className="flex flex-col w-full max-w-[320px] bg-white rounded-2xl border-[1.5px] overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
+      style={{ borderColor: borderColor }}
+    >
+      {/* Product Image Container - Clean White Background */}
+      <div className="w-full h-[220px] md:h-[260px] flex items-center justify-center p-6 bg-white">
         {product.image ? (
           <img 
             src={product.image} 
             alt={displayName} 
-            className="w-full h-full object-contain drop-shadow-lg"
+            className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
           />
         ) : (
-          <div className="w-36 h-36 bg-gray-200 rounded-xl flex items-center justify-center text-gray-400 text-sm">
+          <div className="w-36 h-36 bg-gray-50 rounded-xl flex items-center justify-center text-gray-400 text-sm">
             Product Image
           </div>
         )}
       </div>
 
       {/* Product Details */}
-      <div className="flex flex-col gap-3 p-5 md:p-6">
+      <div className="flex flex-col gap-3 p-5 md:p-6 pt-0">
         {/* Product Title & Subtitle */}
-        <div className="text-center min-h-[60px] flex flex-col justify-center">
+        <div className="text-center min-h-[60px] flex flex-col justify-start">
           <h3 className="text-lg md:text-xl font-bold text-[#3F8133] mb-1 leading-tight">
             {displayName}
           </h3>
           {displaySubtitle && (
-            <p className="text-sm md:text-base text-gray-600 font-medium">
+            <p className="text-sm md:text-base text-gray-500 font-medium">
               {displaySubtitle}
             </p>
           )}
         </div>
 
         {/* Star Rating & Reviews */}
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center justify-center gap-2 mb-1">
           {renderStars()}
           {product.reviews !== undefined && (
-            <span className="text-sm text-gray-500 font-medium">
+            <span className="text-xs text-gray-400 font-medium">
               ({product.reviews})
             </span>
           )}

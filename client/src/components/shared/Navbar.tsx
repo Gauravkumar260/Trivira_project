@@ -15,7 +15,7 @@ import { usePathname } from 'next/navigation';
 
 // --- ASSET CONFIGURATION ---
 const assets = {
-  logo: "/assets/images/Logo1.svg", 
+  logo: "/assets/images/logo.svg", 
   icons: {
     search: "/assets/images/search.svg",
     cart: "/assets/images/cart.svg",

@@ -10,16 +10,17 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { Checkbox } from '../ui';
 
 // --- ASSET PATHS (Public Folder) ---
 const assets = {
   socials: {
-    instagram: "/assets/images/skill-icons_instagram.svg",
-    linkedin: "/assets/images/skill-icons_linkedin.svg",
-    twitter: "/assets/images/fa7-brands_square-x-twitter.svg",
-    whatsapp: "/assets/images/logos_whatsapp-icon.svg",
+    instagram: "/assets/images/instagram.svg",
+    linkedin: "/assets/images/linkedin.svg",
+    twitter: "/assets/images/twitter.svg",
+    whatsapp: "/assets/images/whatsapp.svg",
   },
-  logo: "/assets/images/Logo.svg",
+  logo: "/assets/images/logo.svg",
   shareIcon: "/assets/images/share.svg",
 };
 
@@ -124,14 +125,10 @@ const Footer: React.FC = () => {
               {/* Checkbox */}
               <div className="flex items-start gap-2 group cursor-pointer">
                 <div className="relative flex items-center pt-1">
-                   <input 
-                     type="checkbox" 
+                   <Checkbox 
                      id="newsletter_agree" 
-                     className="peer h-4 w-4 cursor-pointer appearance-none rounded-sm border border-white checked:bg-white transition-all" 
+                     variant="dark"
                    />
-                   <svg className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 text-trivira-dark opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                     <path d="M20.285 2l-11.285 11.561-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/>
-                   </svg>
                 </div>
                 <label htmlFor="newsletter_agree" className="font-sans font-normal text-xs text-gray-300 leading-[18px] cursor-pointer hover:text-white transition-colors select-none">
                   I agree to receive marketing emails from Trivira. You can unsubscribe from these emails at any time.

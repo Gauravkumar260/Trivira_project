@@ -20,6 +20,14 @@ interface Review {
   customerImage: string;
 }
 
+const assets = {
+  testimonials: {
+    hero: "/assets/images/testimonial-hero.svg",
+    customer1: "/assets/images/customer-1.svg",
+    customer2: "/assets/images/customer-2.svg",
+  }
+};
+
 // --- Data Source ---
 const reviews: Review[] = [
   {
@@ -28,7 +36,7 @@ const reviews: Review[] = [
     title: "I Love Lions mane Capsule of Trivira",
     text: "They help me focus and not get as distracted. My brain is less foggy and it's easier to think and not stress.",
     themeColor: "#da483b", // Red
-    customerImage: "/assets/images/Rectangle 7.SVG" 
+    customerImage: assets.testimonials.customer1, 
   },
   {
     id: 2,
@@ -36,11 +44,11 @@ const reviews: Review[] = [
     title: "I Love Lions mane Capsule of Trivira",
     text: "They help me focus and not get as distracted. My brain is less foggy and it's easier to think and not stress.",
     themeColor: "#8a38f5", // Purple
-    customerImage: "/assets/images/Rectangle 8.SVG"
+    customerImage: assets.testimonials.customer2,
   }
 ];
 
-const HERO_IMAGE = "/assets/images/Rectangle 5.svg";
+const HERO_IMAGE = assets.testimonials.hero;
 
 const Testimonials: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);

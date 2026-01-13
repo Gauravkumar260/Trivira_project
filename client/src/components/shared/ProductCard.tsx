@@ -41,9 +41,17 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           {/* [SPACE FOR PRODUCT SVG] - Paste your Product SVG below */}
           {/* ==================================================== */}
           
-          <div className="text-gray-400 text-xs text-center p-4">
-             [Product SVG Placeholder]
-          </div>
+          {image ? (
+            <img 
+              src={image} 
+              alt={title || 'Product'} 
+              className="w-full h-full object-contain p-4"
+            />
+          ) : (
+            <div className="text-gray-400 text-xs text-center p-4">
+               [Product SVG Placeholder]
+            </div>
+          )}
 
           {/* ==================================================== */}
         </div>

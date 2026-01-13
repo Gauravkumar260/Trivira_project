@@ -1,26 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import ProductCard from './components/features/ProductCard';
 
+const assets = {
+  dummy: {
+    mushrooms: "/assets/images/dummy-mushrooms.svg",
+    protein: "/assets/images/dummy-protein.svg",
+    stevia: "/assets/images/dummy-stevia.svg",
+  }
+};
+
 // Mock data for MVP verification
 const DUMMY_PRODUCTS = [
   {
     _id: '1',
     name: 'Functional Mushroom Blend',
-    image: 'https://placehold.co/300x200?text=Mushrooms',
+    image: assets.dummy.mushrooms,
     category: 'Nutraceuticals',
     price: 49.99,
   },
   {
     _id: '2',
     name: 'Plant Based Protein',
-    image: 'https://placehold.co/300x200?text=Protein',
+    image: assets.dummy.protein,
     category: 'Nutraceuticals',
     price: 39.99,
   },
   {
     _id: '3',
     name: 'Organic Stevia Extract',
-    image: 'https://placehold.co/300x200?text=Stevia',
+    image: assets.dummy.stevia,
     category: 'Nutraceuticals',
     price: 19.99,
   },
