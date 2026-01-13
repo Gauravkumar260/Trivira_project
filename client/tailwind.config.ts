@@ -1,59 +1,120 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  content: [
+    darkMode: ["class"],
+    content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {
-      colors: {
-        trivira: {
-          primary: "#3F8133",    // Main Green
-          dark: "#086938",       // Deep Green
-          cream: "#FCF2E7",      // Hero Background
-          peach: "#FFEBD6",      // Testimonials Background
-          textGray: "#969494",   
-          accent: {
-            red: "#DA483B",
-            orange: "#F89920",
-            purple: "#9F3691",
-            pink: "#EA236F",
-          }
-        },
-      },
-      // ... inside theme: { extend: { ... } }
-
-      fontFamily: {
-        heading: ["var(--font-montserrat)", "sans-serif"],
-        body: ["var(--font-rubik)", "sans-serif"],
-        tag: ["var(--font-dm-sans)", "sans-serif"],
-      },
-      // ADD THIS SECTION BELOW
-      fontSize: {
-        base: "16px",    // Matches Style B (Standard)
-        "lg-custom": "22px", // Matches Style C & D (Custom 22px)
-        "2xl-custom": "32px", // Matches Style A (Custom 32px)
-      },
-      // ... keep colors and animations same
-      animation: {
-        "bounce-slow": "float 3s ease-in-out infinite", 
-        "fade-in": "fade-in 1s ease-out forwards",
-      },
-      keyframes: {
-        float: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-20px)" }, 
-        },
-        "fade-in": {
-          "0%": { opacity: "0", transform: "translateY(10px)" },
-          "100%": { opacity: "1", transform: "none" },
-        },
-      },
-    },
+  	extend: {
+  		colors: {
+  			trivira: {
+  				primary: '#3F8133',
+  				dark: '#086938',
+  				cream: '#FCF2E7',
+  				peach: '#FFEBD6',
+  				textGray: '#969494',
+  				accent: {
+  					red: '#DA483B',
+  					orange: '#F89920',
+  					purple: '#9F3691',
+  					pink: '#EA236F'
+  				}
+  			},
+  			background: 'hsl(var(--background))',
+  			foreground: 'hsl(var(--foreground))',
+  			card: {
+  				DEFAULT: 'hsl(var(--card))',
+  				foreground: 'hsl(var(--card-foreground))'
+  			},
+  			popover: {
+  				DEFAULT: 'hsl(var(--popover))',
+  				foreground: 'hsl(var(--popover-foreground))'
+  			},
+  			primary: {
+  				DEFAULT: 'hsl(var(--primary))',
+  				foreground: 'hsl(var(--primary-foreground))'
+  			},
+  			secondary: {
+  				DEFAULT: 'hsl(var(--secondary))',
+  				foreground: 'hsl(var(--secondary-foreground))'
+  			},
+  			muted: {
+  				DEFAULT: 'hsl(var(--muted))',
+  				foreground: 'hsl(var(--muted-foreground))'
+  			},
+  			accent: {
+  				DEFAULT: 'hsl(var(--accent))',
+  				foreground: 'hsl(var(--accent-foreground))'
+  			},
+  			destructive: {
+  				DEFAULT: 'hsl(var(--destructive))',
+  				foreground: 'hsl(var(--destructive-foreground))'
+  			},
+  			border: 'hsl(var(--border))',
+  			input: 'hsl(var(--input))',
+  			ring: 'hsl(var(--ring))',
+  			chart: {
+  				'1': 'hsl(var(--chart-1))',
+  				'2': 'hsl(var(--chart-2))',
+  				'3': 'hsl(var(--chart-3))',
+  				'4': 'hsl(var(--chart-4))',
+  				'5': 'hsl(var(--chart-5))'
+  			}
+  		},
+  		fontFamily: {
+  			heading: [
+  				'var(--font-montserrat)',
+  				'sans-serif'
+  			],
+  			body: [
+  				'var(--font-rubik)',
+  				'sans-serif'
+  			],
+  			tag: [
+  				'var(--font-dm-sans)',
+  				'sans-serif'
+  			]
+  		},
+  		fontSize: {
+  			base: '16px',
+  			'lg-custom': '22px',
+  			'2xl-custom': '32px'
+  		},
+  		animation: {
+  			'bounce-slow': 'float 3s ease-in-out infinite',
+  			'fade-in': 'fade-in 1s ease-out forwards'
+  		},
+  		keyframes: {
+  			float: {
+  				'0%, 100%': {
+  					transform: 'translateY(0)'
+  				},
+  				'50%': {
+  					transform: 'translateY(-20px)'
+  				}
+  			},
+  			'fade-in': {
+  				'0%': {
+  					opacity: '0',
+  					transform: 'translateY(10px)'
+  				},
+  				'100%': {
+  					opacity: '1',
+  					transform: 'none'
+  				}
+  			}
+  		},
+  		borderRadius: {
+  			lg: 'var(--radius)',
+  			md: 'calc(var(--radius) - 2px)',
+  			sm: 'calc(var(--radius) - 4px)'
+  		}
+  	}
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 };
 
 export default config;

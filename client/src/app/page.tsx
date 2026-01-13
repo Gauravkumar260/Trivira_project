@@ -1,6 +1,6 @@
 /**
  * Filename: app/page.tsx
- * Description: Fully Responsive Home Page.
+ * Description: Fully Responsive Home Page using Shadcn Carousel.
  * Optimizations:
  * - Mobile: Stacked layouts, readable text, fluid heights.
  * - Desktop: Preserved original 2-column/4-column layouts.
@@ -10,10 +10,19 @@
 
 "use client"; 
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
 // import Footer from '@/components/Footer'; 
 import Testimonials from '@/components/shared/Testimonials';
+import { Button } from '@/components/ui';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 // =========================================================
 // 1. ASSET PATHS
@@ -150,19 +159,6 @@ interface Product { id: string; title: string; desc: string; image: string; icon
 interface IngredientBadge { label: string; icon: string; }
 
 const Home: React.FC = () => {
-  const [currentSlide, setCurrentSlide] = useState<number>(0);
-  const [isPaused, setIsPaused] = useState<boolean>(false);
-
-  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
-  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  const goToSlide = (index: number) => setCurrentSlide(index);
-
-  useEffect(() => {
-    if (isPaused) return; 
-    const timer = setInterval(() => setCurrentSlide((prev) => (prev + 1) % slides.length), 5000);
-    return () => clearInterval(timer);
-  }, [isPaused]); 
-
   const benefitItems: BenefitItem[] = [
     { icon: assets.icons.focus, title: "Focus", color: "text-[#da483b]", desc: "Lion's Mane Mushrooms promotes a cognitive boost and enhanced focus to help start your day.", btnText: "SHOP LION'S MANE" },
     { icon: assets.icons.energy, title: "Energy", color: "text-[#f89920]", desc: "Cordyceps Mushrooms are ideal for an extra energy surge to boost your stamina and endurance.", btnText: "SHOP CORDYCEPS" },
@@ -202,25 +198,23 @@ const Home: React.FC = () => {
     { label: 'Vegan Friendly', icon: assets.icons.vegan } 
   ];
 
+  const plugin = React.useRef(
+    Autoplay({ delay: 5000, stopOnInteraction: true })
+  )
+
   return (
     <div className="w-full font-sans bg-white selection:bg-[#086938] selection:text-white">
 
 {/* ================= SECTION 1: HERO CAROUSEL ================= */}
-      <div 
-        className="relative w-full max-w-[1440px] mx-auto overflow-hidden group bg-[#FCF2E7] h-auto min-h-[600px] md:h-[748px]"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
+      <Carousel
+        plugins={[plugin.current]}
+        className="w-full max-w-[1440px] mx-auto bg-[#FCF2E7]"
+        onMouseEnter={plugin.current.stop}
+        onMouseLeave={plugin.current.reset}
       >
-        {slides.map((slide, index) => {
-          let position = "translate-x-full opacity-0"; 
-          if (index === currentSlide) {
-          position = "translate-x-0 opacity-100 z-10"; 
-          } else if (index === currentSlide - 1 || (currentSlide === 0 && index === slides.length - 1)) {
-          position = "-translate-x-full opacity-0 z-0"; 
-          }
-
-          return (
-            <div key={slide.id} className={`absolute inset-0 w-full h-full transition-all duration-700 ease-in-out ${position}`}>
+        <CarouselContent>
+          {slides.map((slide, index) => (
+            <CarouselItem key={slide.id} className="relative h-auto min-h-[600px] md:h-[748px]">
               <div className="flex flex-col-reverse md:flex-row-reverse h-full">
                 
                 {/* Content Side */}
@@ -238,9 +232,9 @@ const Home: React.FC = () => {
 
                     {/* Progress Bar & Tag */}
                     <div className="flex items-center gap-4 text-[#3F8133] font-medium mb-2">
-                        <span className={`text-base md:text-xl font-sans tracking-widest transition-all duration-700 delay-100 ${index === currentSlide ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>{slide.tag}</span>
+                        <span className="text-base md:text-xl font-sans tracking-widest transition-all duration-700 delay-100">{slide.tag}</span>
                         <div className="w-12 md:w-24 h-1 rounded-full overflow-hidden relative" style={{ backgroundColor: 'rgba(63, 129, 51, 0.3)' }}>
-                          <div className="h-full bg-[#3F8133] transition-all duration-1000 ease-out relative z-10" style={{ width: index === currentSlide ? `${((index + 1) / 7) * 100}%` : '0%' }}></div>
+                          <div className="h-full bg-[#3F8133] transition-all duration-1000 ease-out relative z-10" style={{ width: `${((index + 1) / 7) * 100}%` }}></div>
                         </div>
                         <span className="text-base md:text-xl font-sans tracking-widest">07</span>
                       </div>
@@ -252,8 +246,12 @@ const Home: React.FC = () => {
                       {slide.desc}
                     </p>
                     <div className="flex gap-4 mt-2">
-                      <button className="bg-transparent border-2 border-[#3F8133] text-[#3F8133] px-4 py-2 md:px-5 md:py-3 rounded-md font-sans font-semibold hover:bg-[#3F8133] hover:text-white transition uppercase text-xs md:text-sm tracking-wider">Shop Now</button>
-                      <button className="bg-[#3F8133] text-white px-5 py-2 md:px-7 md:py-3 rounded-md font-sans font-semibold hover:bg-opacity-90 transition shadow-lg uppercase text-xs md:text-sm tracking-wider">Shop All</button>
+                      <Link href="/products">
+                        <Button variant="outline" className="text-[#3F8133] px-4 py-2 md:px-5 md:py-3 text-xs md:text-sm tracking-wider">Shop Now</Button>
+                      </Link>
+                      <Link href="/products">
+                        <Button variant="primary" className="text-white px-5 py-2 md:px-7 md:py-3 text-xs md:text-sm tracking-wider">Shop All</Button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -261,36 +259,15 @@ const Home: React.FC = () => {
                 {/* Image Side */}
                 <div className="w-full md:w-1/2 h-[50vh] md:h-full relative overflow-hidden">
                     <img src={slide.image} alt={slide.title} className="w-full h-full object-cover"/>
-                    
-                    
                 </div>
 
               </div>
-            </div>
-          );
-        })}
-
-        {/* Navigation Arrows - Visible on All Devices (Modified) */}
-        {/* Changed 'hidden md:flex' to 'flex' and adjusted styling for mobile */}
-        <button 
-          onClick={prevSlide} 
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 z-30 w-10 h-10 md:w-12 md:h-12 bg-white/80 hover:bg-white text-[#3F8133] rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-110"
-          aria-label="Previous Slide"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
-        </button>
-        
-        <button 
-          onClick={nextSlide} 
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 z-30 w-10 h-10 md:w-12 md:h-12 bg-white/80 hover:bg-white text-[#3F8133] rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-110"
-          aria-label="Next Slide"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
-        </button>
-
-        {/* Removed Pagination Dots as requested */}
-        
-      </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 z-30" />
+        <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 z-30" />
+      </Carousel>
 
       {/* ================= SECTION 2: CERTIFICATIONS ================= */}
       {/* UPDATE: Removed fixed height, added padding and flex-wrap */}
@@ -341,10 +318,10 @@ const Home: React.FC = () => {
                 <p className="font-rubik text-[#086938] text-base text-center leading-[22.4px] w-[90%]">
                   {item.desc}
                 </p>
-                <Link href="/products" className="group inline-flex gap-2.5 px-6 py-3 rounded-lg border border-[#3f8133] items-center justify-center cursor-pointer hover:bg-[#3f8133] hover:text-white transition-colors w-full md:w-auto">
-                  <span className="font-sans font-bold text-[#3F8133] group-hover:text-white text-base text-center uppercase tracking-wide">
+                <Link href="/products" className="w-full md:w-auto">
+                  <Button variant="outline" className={`w-full group-hover:bg-[#3f8133] group-hover:text-white`}>
                     {item.btnText}
-                  </span>
+                  </Button>
                 </Link>
               </article>
             ))}
@@ -389,9 +366,9 @@ const Home: React.FC = () => {
                       </li>
                     ))}
                   </ul>
-                  <button className="self-start inline-flex items-center justify-center gap-2.5 px-6 py-3 bg-[#3f8133] rounded-lg hover:opacity-90 transition-opacity w-full md:w-auto">
-                    <span className="font-sans font-semibold text-white text-base uppercase whitespace-nowrap">{product.btnText}</span>
-                  </button>
+                  <Button className="self-start px-6 py-3 w-full md:w-auto">
+                    {product.btnText}
+                  </Button>
                 </div>
                 
                 {/* Product Image */}
@@ -447,7 +424,9 @@ const Home: React.FC = () => {
               <p>Blending the wisdom of tradition with the rigor of modern science, Trivira creates premium, natural wellness products that nurture both health and nature. Every product carries a promise — to empower healthier lifestyles, spread awareness of natural nutrition, and make wellness accessible to every home in India.</p>
             </div>
             <div className="flex justify-center md:justify-start">
-              <button className="bg-[#3f8133] text-[#fcf4ef] px-6 py-3 rounded-lg font-bold hover:opacity-90 transition-opacity uppercase text-sm tracking-wide shadow-sm w-full md:w-auto">READ OUR STORY</button>
+              <Link href="/about">
+                <Button variant="primary" className="bg-[#3f8133] px-6 py-3 w-full md:w-auto">READ OUR STORY</Button>
+              </Link>
             </div>
           </div>
         </div>

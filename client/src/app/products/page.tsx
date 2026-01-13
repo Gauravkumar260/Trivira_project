@@ -317,11 +317,10 @@ const ProductsContent = () => {
             </div>
           </div>
         )}
-        
-        {/* ========== TESTIMONIALS SECTION ========== */}
-        <Testimonials/>
-
       </div>
+      
+      {/* ========== TESTIMONIALS SECTION ========== */}
+      <Testimonials/>
     </div>
   );
 };

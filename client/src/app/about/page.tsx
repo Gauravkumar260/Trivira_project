@@ -8,6 +8,8 @@
 
 import React from 'react';
 import type { Metadata } from 'next';
+import Link from 'next/link';
+import { Button } from '@/components/ui';
 
 export const metadata: Metadata = {
   title: "About Us | Trivira",
@@ -86,9 +88,14 @@ const AboutPage: React.FC = () => {
               We believe that wellness is a right, not a luxury. Our mission is to make natural, clean, and effective nutrition accessible to all, while our vision is to see every Indian home embrace healthier lifestyles through plant-powered, sustainable choices.
             </p>
          </div>
-         <button className="btn-primary text-base md:text-lg px-8 py-4 shadow-lg hover:-translate-y-1 transition-transform">
-           Join Our Journey
-         </button>
+         <Link href="/careers">
+           <Button 
+             variant="primary"
+             className="text-base md:text-lg px-8 py-4 shadow-lg hover:-translate-y-1 transition-transform"
+           >
+             Join Our Journey
+           </Button>
+         </Link>
       </div>
 
       {/* ================= SECTION 3: THE SCIENCE ================= */}

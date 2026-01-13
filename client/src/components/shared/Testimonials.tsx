@@ -9,6 +9,8 @@
 "use client";
 
 import React, { useRef, useState } from 'react';
+import Link from 'next/link';
+import { Button } from '@/components/ui';
 
 // --- Interface Definitions ---
 interface Review {
@@ -106,11 +108,11 @@ const Testimonials: React.FC = () => {
               </p>
             </div>
 
-            <button className="bg-trivira-dark rounded-lg px-6 py-3 flex items-center justify-center w-fit hover:opacity-90 transition-all shadow-md hover:-translate-y-1">
-              <span className="font-sans font-semibold text-white text-sm md:text-base uppercase tracking-wide">
+            <Link href="/reviews">
+              <Button className="bg-trivira-dark px-6 py-3 w-fit hover:-translate-y-1">
                 Join Review
-              </span>
-            </button>
+              </Button>
+            </Link>
           </div>
 
           <div className="w-full lg:w-[738px] h-[250px] md:h-[460px] rounded-[24px] md:rounded-[32px] overflow-hidden shadow-lg bg-[#E60023] relative flex items-center justify-center group">

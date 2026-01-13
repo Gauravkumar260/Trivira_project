@@ -2,16 +2,34 @@
  * Filename: components/Navbar.tsx
  * Description: Fully Functional Navbar.
  * Updates: 
- * 1. Search icon now toggles a search bar.
- * 2. Search bar slides down smoothly.
+ * 1. Uses Sheet for Mobile Menu.
+ * 2. Uses Command Dialog for Search.
  * Author: Gaurav (Goli)
  */
 
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link'; 
 import { usePathname } from 'next/navigation';
+import { Button } from '@/components/ui';
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+  SheetClose
+} from '@/components/ui/sheet';
+import {
+  CommandDialog,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+} from "@/components/ui/command";
 
 // --- ASSET CONFIGURATION ---
 const assets = {
@@ -24,18 +42,27 @@ const assets = {
 };
 
 const Navbar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  
-  // NEW: State for Search Bar
+  // NEW: State for Search Command Palette
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
-  
   const pathname = usePathname();
+
+  // Toggle search with keyboard shortcut (Ctrl+K)
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault()
+        setIsSearchOpen((open) => !open)
+      }
+    }
+    document.addEventListener("keydown", down)
+    return () => document.removeEventListener("keydown", down)
+  }, [])
 
   // --- HELPER: ACTIVE STATE LOGIC ---
   const getLinkClass = (path: string, isMobile = false) => {
     const isActive = path === '/' ? pathname === '/' : pathname.startsWith(path);
     const baseClasses = "transition-colors duration-300 font-sans block";
-    const sizeClasses = isMobile ? "text-lg py-2" : "text-base";
+    const sizeClasses = isMobile ? "text-lg py-3 w-full text-left border-b border-gray-100 last:border-0" : "text-base";
     const colorClasses = isActive 
       ? "text-trivira-primary font-bold" 
       : "text-[#969494] font-medium hover:text-trivira-primary";
@@ -51,7 +78,7 @@ const Navbar: React.FC = () => {
           
         {/* --- 1. LOGO --- */}
         <div className="flex-shrink-0 flex items-center">
-          <Link href="/" className="flex items-center gap-2" onClick={() => { setIsOpen(false); setIsSearchOpen(false); }}>
+          <Link href="/" className="flex items-center gap-2">
             <img src={assets.logo} alt="Trivira Logo" className="h-10 md:h-16 w-auto object-contain" />
           </Link>
         </div>
@@ -66,9 +93,9 @@ const Navbar: React.FC = () => {
 
           {/* Action Icons */}
           <div className="flex items-center gap-6 ml-4 border-l border-gray-100 pl-6">
-            {/* DESKTOP SEARCH BUTTON (Now Active) */}
+            {/* DESKTOP SEARCH BUTTON */}
             <button 
-              onClick={() => setIsSearchOpen(!isSearchOpen)}
+              onClick={() => setIsSearchOpen(true)}
               className="hover:scale-110 transition duration-300 focus:outline-none"
             >
               <img src={assets.icons.search} alt="Search" className="w-6 h-6" />
@@ -86,77 +113,72 @@ const Navbar: React.FC = () => {
         {/* --- 3. MOBILE CONTROLS --- */}
         <div className="md:hidden flex items-center gap-5">
           
-          {/* MOBILE SEARCH BUTTON (Now Active) */}
+          {/* MOBILE SEARCH BUTTON */}
           <button 
-            onClick={() => setIsSearchOpen(!isSearchOpen)}
+            onClick={() => setIsSearchOpen(true)}
             className="hover:opacity-80 transition focus:outline-none"
           >
-             {/* Toggle Icon: Search or Close (X) */}
-             {isSearchOpen ? (
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="#3F8133" className="w-6 h-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-             ) : (
-                <img src={assets.icons.search} alt="Search" className="w-6 h-6" />
-             )}
+             <img src={assets.icons.search} alt="Search" className="w-6 h-6" />
           </button>
 
           <Link href="/cart" className="hover:opacity-80 transition">
               <img src={assets.icons.cart} alt="Cart" className="w-6 h-6" />
           </Link>
 
-          {/* Hamburger */}
-          <button onClick={() => { setIsOpen(!isOpen); setIsSearchOpen(false); }} className="text-trivira-primary focus:outline-none p-1">
-            {isOpen ? (
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-              </svg>
-            )}
-          </button>
+          {/* Hamburger / Sheet Trigger */}
+          <Sheet>
+            <SheetTrigger asChild>
+              <button className="text-trivira-primary focus:outline-none p-1">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+              </button>
+            </SheetTrigger>
+            <SheetContent side="right" className="flex flex-col h-full bg-white w-[300px] border-l border-gray-100">
+              <SheetHeader className="mb-4 text-left">
+                <SheetTitle className="text-trivira-primary font-bold text-2xl">Menu</SheetTitle>
+                <SheetDescription>Explore Trivira Wellness</SheetDescription>
+              </SheetHeader>
+              
+              <div className="flex-1 flex flex-col gap-2 overflow-y-auto">
+                <SheetClose asChild><Link href="/" className={getLinkClass('/', true)}>Home</Link></SheetClose>
+                <SheetClose asChild><Link href="/products" className={getLinkClass('/products', true)}>Nutraceuticals Product</Link></SheetClose>
+                <SheetClose asChild><Link href="/about" className={getLinkClass('/about', true)}>About Us</Link></SheetClose>
+                <SheetClose asChild><Link href="/blogs" className={getLinkClass('/blogs', true)}>Blogs</Link></SheetClose>
+                <SheetClose asChild><Link href="/contact" className={getLinkClass('/contact', true)}>Contact Us</Link></SheetClose>
+              </div>
+
+              <div className="mt-auto pt-6 border-t border-gray-100">
+                 <SheetClose asChild>
+                   <Link href="/login" className="flex items-center gap-3 text-[#3F8133] hover:opacity-80 font-bold p-3 bg-[#FCF2E7] rounded-lg justify-center">
+                     <img src={assets.icons.user} className="w-5 h-5"/> 
+                     <span className="uppercase tracking-wide text-sm">Login / Sign Up</span>
+                   </Link>
+                 </SheetClose>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
 
-      {/* --- 4. DROPDOWN SEARCH BAR (Slides Down) --- */}
-      <div className={`
-        absolute left-0 w-full bg-white shadow-md border-t border-gray-100 overflow-hidden transition-all duration-300 ease-in-out z-30
-        ${isSearchOpen ? 'max-h-[80px] opacity-100 py-4' : 'max-h-0 opacity-0 py-0'}
-      `}
-      style={{ top: '100%' }} // Positions it directly below the navbar
-      >
-         <div className="max-w-[800px] mx-auto px-6 flex items-center gap-4">
-            <input 
-              type="text" 
-              placeholder="Search for products..." 
-              className="w-full bg-[#FCF2E7] text-trivira-dark px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-trivira-primary/50"
-            />
-            <button className="bg-trivira-primary text-white px-6 py-3 rounded-lg font-bold uppercase text-sm hover:opacity-90">
-              Search
-            </button>
-         </div>
-      </div>
+      {/* --- 4. COMMAND SEARCH DIALOG --- */}
+      <CommandDialog open={isSearchOpen} onOpenChange={setIsSearchOpen}>
+        <CommandInput placeholder="Type a command or search..." />
+        <CommandList>
+          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandGroup heading="Suggestions">
+            <CommandItem onSelect={() => { setIsSearchOpen(false); window.location.href = '/products?filter=STEVIA'; }}>Stevia</CommandItem>
+            <CommandItem onSelect={() => { setIsSearchOpen(false); window.location.href = '/products?filter=FUNCTIONAL MUSHROOMS'; }}>Mushrooms</CommandItem>
+            <CommandItem onSelect={() => { setIsSearchOpen(false); window.location.href = '/products?filter=PLANT BASED PROTEIN'; }}>Protein</CommandItem>
+          </CommandGroup>
+          <CommandGroup heading="Pages">
+            <CommandItem onSelect={() => { setIsSearchOpen(false); window.location.href = '/about'; }}>About Us</CommandItem>
+            <CommandItem onSelect={() => { setIsSearchOpen(false); window.location.href = '/blogs'; }}>Blogs</CommandItem>
+            <CommandItem onSelect={() => { setIsSearchOpen(false); window.location.href = '/contact'; }}>Contact</CommandItem>
+          </CommandGroup>
+        </CommandList>
+      </CommandDialog>
 
-      {/* --- 5. MOBILE MENU --- */}
-      {isOpen && (
-        <div className="md:hidden bg-white shadow-xl border-t border-gray-100 absolute top-[80px] left-0 w-full animate-fade-in z-40 flex flex-col">
-          <div className="px-6 py-6 space-y-4 flex flex-col items-center text-center">
-            <Link href="/" onClick={() => setIsOpen(false)} className={getLinkClass('/', true)}>Home</Link>
-            <Link href="/products" onClick={() => setIsOpen(false)} className={getLinkClass('/products', true)}>Nutraceuticals Product</Link>
-            <Link href="/about" onClick={() => setIsOpen(false)} className={getLinkClass('/about', true)}>About Us</Link>
-            <Link href="/blogs" onClick={() => setIsOpen(false)} className={getLinkClass('/blogs', true)}>Blogs</Link>
-            <Link href="/contact" onClick={() => setIsOpen(false)} className={getLinkClass('/contact', true)}>Contact Us</Link>
-          </div>
-          <div className="bg-[#FCF2E7] py-4 flex justify-center gap-10 border-t border-[#3F8133]/10">
-               <Link href="/login" onClick={() => setIsOpen(false)} className="flex flex-col items-center gap-1 text-[#3F8133]">
-                 <img src={assets.icons.user} className="w-6 h-6"/> 
-                 <span className="text-xs font-semibold uppercase">Login</span>
-               </Link>
-          </div>
-        </div>
-      )}
     </nav>
   );
 };

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Product } from '@/types';
+import { Button } from '@/components/ui';
 
 interface ProductCardProps {
   product: Product;
@@ -11,9 +12,16 @@ interface ProductCardProps {
  * ProductCard Component - Trivira Design
  * Matches exact visual specs: Dynamic border colors, Brand Green stars, Clean white layout
  */
+import { useRouter } from 'next/navigation';
+
+// ... inside component ...
+
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const router = useRouter();
+
   const handleAddToCart = () => {
-    console.log('Add to cart:', product.id);
+    // In a real app, dispatch to Redux here
+    router.push('/cart');
   };
 
   const displayName = product.name || product.title || 'Product';
@@ -104,7 +112,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
 
         {/* Add to Cart Button */}
-        <button
+        <Button
           onClick={handleAddToCart}
           className="w-full py-2.5 md:py-3 px-4 rounded-lg font-bold text-sm md:text-base text-white transition-all duration-200 hover:opacity-90 hover:shadow-lg active:scale-95 flex items-center justify-center gap-2"
           style={{ backgroundColor: product.themeColor || '#3F8133' }}
@@ -113,7 +121,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
           </svg>
           {product.btnText || 'Add to Cart'}
-        </button>
+        </Button>
       </div>
     </div>
   );
