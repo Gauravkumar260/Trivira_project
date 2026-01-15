@@ -6,6 +6,7 @@ import { Product } from '@/types';
 import { Button } from '@/components/ui';
 import { useCartStore } from '@/stores/cartStore';
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 interface ProductCardProps {
   product: Product;
@@ -13,6 +14,7 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addToCart } = useCartStore();
+  const router = useRouter();
 
   const handleAddToCart = () => {
     addToCart(product);
@@ -20,7 +22,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       description: "You can view it in your cart.",
       action: {
         label: "View Cart",
-        onClick: () => window.location.href = '/cart',
+        onClick: () => router.push('/cart'),
       },
     });
   };
