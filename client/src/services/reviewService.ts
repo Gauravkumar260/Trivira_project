@@ -1,13 +1,5 @@
-import api from '@/lib/axios';
-
-export interface Review {
-  _id: string;
-  name: string;
-  rating: number;
-  title: string;
-  comment: string;
-  createdAt: string;
-}
+// Refactored to use mock data for frontend-only build
+import { Review, mockReviews } from '@/data/reviews';
 
 export interface CreateReviewData {
   name: string;
@@ -16,20 +8,25 @@ export interface CreateReviewData {
   comment: string;
 }
 
+// Simulate network delay
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 export const getReviews = async (): Promise<Review[]> => {
-  try {
-    const response = await api.get('/reviews');
-    return response.data;
-  } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to fetch reviews');
-  }
+  await delay(500); // Simulate loading
+  // Return a copy to avoid mutation issues if we were manipulating it in memory
+  return [...mockReviews];
 };
 
 export const createReview = async (data: CreateReviewData): Promise<Review> => {
-  try {
-    const response = await api.post('/reviews', data);
-    return response.data;
-  } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to create review');
-  }
+  await delay(800); // Simulate API call
+  const newReview: Review = {
+    _id: Math.random().toString(36).substr(2, 9),
+    ...data,
+    createdAt: new Date().toISOString(),
+  };
+  
+  // In a real mock server, we'd push to mockReviews, but imports are read-only.
+  // We'll just return it to simulate success for the UI.
+  // If we wanted persistent mock data, we'd need a different state management or localStorage.
+  return newReview;
 };

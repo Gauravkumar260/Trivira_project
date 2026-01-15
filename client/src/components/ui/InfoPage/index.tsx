@@ -1,7 +1,7 @@
-<<<<<<< HEAD
-=======
+// <<<<<<< HEAD
+// =======
 
->>>>>>> c7d7d086e2b6ca55f58dbc12e97b2f3e5ad5afbb
+// >>>>>>> c7d7d086e2b6ca55f58dbc12e97b2f3e5ad5afbb
 import React from 'react';
 
 interface InfoPageProps {
