@@ -1,56 +1,18 @@
-/**
- * Filename: app/cart/page.tsx
- * Description: Shopping Cart Page.
- * Design: List of items on the left, Order Summary on the right.
- */
 
 "use client";
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Button, Input } from '@/components/ui';
 import { Minus, Plus, Trash2 } from 'lucide-react';
-
-// Mock Cart Data
-const initialCartItems = [
-  {
-    id: '1',
-    name: 'Stevia Powder',
-    price: 245,
-    quantity: 2,
-    image: '/assets/images/stevia-powder.svg',
-    category: 'Stevia',
-  },
-  {
-    id: '9',
-    name: "Lion's Mane Mushroom",
-    price: 899,
-    quantity: 1,
-    image: '/assets/images/lions-mane.svg',
-    category: 'Mushrooms',
-  },
-];
+import { useCartStore } from '@/stores/cartStore';
 
 const CartPage: React.FC = () => {
-  const [cartItems, setCartItems] = useState(initialCartItems);
   const router = useRouter();
+  const { cartItems, updateQuantity, removeFromCart } = useCartStore();
 
-  const updateQuantity = (id: string, delta: number) => {
-    setCartItems(items => items.map(item => {
-      if (item.id === id) {
-        const newQty = Math.max(1, item.quantity + delta);
-        return { ...item, quantity: newQty };
-      }
-      return item;
-    }));
-  };
-
-  const removeItem = (id: string) => {
-    setCartItems(items => items.filter(item => item.id !== id));
-  };
-
-  const subtotal = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+  const subtotal = cartItems.reduce((acc, item) => acc + (Number(item.price) * (item.qty || 1)), 0);
   const shipping = subtotal > 999 ? 0 : 99; // Free shipping logic
   const total = subtotal + shipping;
 
@@ -80,17 +42,14 @@ const CartPage: React.FC = () => {
 
         <div className="flex flex-col lg:flex-row gap-10">
           
-          {/* Cart Items List */}
           <div className="flex-1 flex flex-col gap-6">
             {cartItems.map((item) => (
-              <div key={item.id} className="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col sm:flex-row gap-6 items-center">
+              <div key={item._id} className="bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col sm:flex-row gap-6 items-center">
                 
-                {/* Image */}
                 <div className="w-24 h-24 bg-[#FCF2E7] rounded-xl flex items-center justify-center shrink-0">
                   <img src={item.image} alt={item.name} className="w-16 h-16 object-contain" />
                 </div>
 
-                {/* Details */}
                 <div className="flex-1 flex flex-col sm:flex-row justify-between w-full gap-4 sm:gap-0">
                   <div className="flex flex-col gap-1">
                     <span className="text-xs font-bold text-trivira-primary uppercase tracking-wider">{item.category}</span>
@@ -98,18 +57,17 @@ const CartPage: React.FC = () => {
                     <p className="text-gray-500 text-sm">Unit Price: ₹{item.price}</p>
                   </div>
 
-                  {/* Quantity & Remove */}
                   <div className="flex items-center justify-between sm:justify-end gap-6">
                     <div className="flex items-center border border-gray-200 rounded-lg h-10">
                       <button 
-                        onClick={() => updateQuantity(item.id, -1)}
+                        onClick={() => updateQuantity(item._id!, Math.max(1, (item.qty || 1) - 1))}
                         className="w-10 h-full flex items-center justify-center text-gray-500 hover:text-trivira-primary hover:bg-gray-50 rounded-l-lg transition"
                       >
                         <Minus size={16} />
                       </button>
-                      <span className="w-10 text-center font-bold text-trivira-dark">{item.quantity}</span>
+                      <span className="w-10 text-center font-bold text-trivira-dark">{item.qty}</span>
                       <button 
-                        onClick={() => updateQuantity(item.id, 1)}
+                        onClick={() => updateQuantity(item._id!, (item.qty || 1) + 1)}
                         className="w-10 h-full flex items-center justify-center text-gray-500 hover:text-trivira-primary hover:bg-gray-50 rounded-r-lg transition"
                       >
                         <Plus size={16} />
@@ -117,11 +75,11 @@ const CartPage: React.FC = () => {
                     </div>
                     
                     <div className="text-right min-w-[80px]">
-                       <p className="font-bold text-lg text-trivira-dark">₹{item.price * item.quantity}</p>
+                       <p className="font-bold text-lg text-trivira-dark">₹{Number(item.price) * (item.qty || 1)}</p>
                     </div>
 
                     <button 
-                      onClick={() => removeItem(item.id)}
+                      onClick={() => removeFromCart(item._id!)}
                       className="text-gray-400 hover:text-red-500 transition p-2"
                       title="Remove Item"
                     >
@@ -134,7 +92,6 @@ const CartPage: React.FC = () => {
             ))}
           </div>
 
-          {/* Order Summary */}
           <div className="w-full lg:w-[380px] shrink-0">
             <div className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-100 sticky top-28 flex flex-col gap-6">
               <h2 className="text-xl font-bold text-trivira-dark font-heading border-b border-gray-100 pb-4">Order Summary</h2>
@@ -174,7 +131,6 @@ const CartPage: React.FC = () => {
                 </Link>
               </div>
 
-              {/* Coupon Code */}
               <div className="mt-4 pt-6 border-t border-gray-100">
                  <label className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 block">Discount Code</label>
                  <div className="flex gap-2">
