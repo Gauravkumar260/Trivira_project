@@ -29,7 +29,7 @@ const Footer: React.FC = () => {
 
   return (
     // UPDATE: Mobile Padding (py-12) vs Desktop Padding (py-[74px])
-    <footer className="bg-trivira-dark w-full text-white py-12 md:py-[74px] px-5 font-sans">
+    <footer className="bg-trivira-dark w-full text-white py-12 md:py-[74px] px-5 font-heading">
       
       {/* Container - Reduced gap on mobile */}
       <div className="max-w-[1280px] mx-auto flex flex-col gap-10 md:gap-14">
@@ -130,7 +130,7 @@ const Footer: React.FC = () => {
                      variant="dark"
                    />
                 </div>
-                <label htmlFor="newsletter_agree" className="font-sans font-normal text-xs text-gray-300 leading-[18px] cursor-pointer hover:text-white transition-colors select-none">
+                <label htmlFor="newsletter_agree" className="font-heading font-normal text-xs text-gray-300 leading-[18px] cursor-pointer hover:text-white transition-colors select-none">
                   I agree to receive marketing emails from Trivira. You can unsubscribe from these emails at any time.
                 </label>
               </div>
@@ -140,7 +140,7 @@ const Footer: React.FC = () => {
 
         {/* --- Bottom Copyright --- */}
         <div className="flex justify-center items-center border-t border-white/10 pt-6">
-           <p className="font-sans font-normal text-sm text-gray-300 text-center">
+           <p className="font-heading font-normal text-sm text-gray-300 text-center">
              Trivira Global Enterprise ©{currentYear}. Registered as Trivira Nutraceuticals Pvt. Ltd.
            </p>
         </div>

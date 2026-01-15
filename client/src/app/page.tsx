@@ -174,7 +174,7 @@ const Home: React.FC = () => {
   )
 
   return (
-    <div className="w-full font-sans bg-white selection:bg-[#086938] selection:text-white">
+    <div className="w-full font-body bg-white selection:bg-[#086938] selection:text-white">
 
 {/* ================= SECTION 1: HERO CAROUSEL ================= */}
       <Carousel
@@ -210,10 +210,10 @@ const Home: React.FC = () => {
                         <span className="text-base md:text-xl font-sans tracking-widest">07</span>
                       </div>
 
-                    <h1 className="text-2xl md:text-[32px] font-sans font-normal text-[#3F8133] leading-[1.2] tracking-tight">
+                    <h1 className="text-2xl md:text-[32px] font-heading font-normal text-[#3F8133] leading-[1.2] tracking-tight">
                       {slide.title}
                     </h1>
-                    <p className="font-rubik text-[#3F8133] text-sm md:text-[20px] leading-relaxed opacity-90">
+                    <p className="font-body text-[#3F8133] text-sm md:text-[20px] leading-relaxed opacity-90">
                       {slide.desc}
                     </p>
                     <div className="flex gap-4 mt-2">
@@ -283,8 +283,8 @@ const Home: React.FC = () => {
           <div className="bg-white rounded-[24px] md:rounded-[84px] px-6 py-4 md:px-16 md:py-8 shadow-sm flex flex-col md:flex-row items-center gap-3 md:gap-12 mx-4 text-center z-10 relative">
              <img src={assets.extras.confetti} alt="Decoration" className="w-8 h-8 md:w-16 md:h-16" />
              <div className="flex flex-col items-center gap-0 md:gap-1">
-                <span className="font-sans font-normal text-[#086938] text-sm md:text-[32px] leading-tight tracking-wide uppercase">WE DELIVER THE WELLNESS,</span>
-                <span className="font-sans font-normal text-[#086938] text-sm md:text-[32px] leading-tight tracking-wide uppercase">OVER 100,000 HAPPY CUSTOMERS</span>
+                <span className="font-heading font-normal text-[#086938] text-sm md:text-[32px] leading-tight tracking-wide uppercase">WE DELIVER THE WELLNESS,</span>
+                <span className="font-heading font-normal text-[#086938] text-sm md:text-[32px] leading-tight tracking-wide uppercase">OVER 100,000 HAPPY CUSTOMERS</span>
              </div>
              <img src={assets.extras.confetti} alt="Decoration" className="w-8 h-8 md:w-16 md:h-16 " />
           </div>
@@ -316,7 +316,7 @@ const Home: React.FC = () => {
       {/* UPDATE: Removed fixed height, added vertical padding */}
       <div className="bg-white w-full flex flex-col justify-center items-center gap-8 md:gap-[80px] py-12 md:py-0 h-auto md:h-[364px]">
         <div className="bg-white border border-[#3f8133]/10 rounded-[40px] md:rounded-[84px] px-8 py-4 md:px-[64px] md:py-[24px] shadow-sm mx-4">
-           <h2 className="font-sans font-normal text-[#086938] text-xl md:text-[40px] leading-tight text-center">WE ARE ALSO AVAILABLE ON</h2>
+           <h2 className="font-heading font-normal text-[#086938] text-xl md:text-[40px] leading-tight text-center">WE ARE ALSO AVAILABLE ON</h2>
         </div>
         <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 w-full max-w-[1114px] px-4">
            {assets.extras.partners.map((logo, index) => (

@@ -11,6 +11,7 @@ const AppError = require('./utils/appError');
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
 const orderRoutes = require('./routes/orderRoutes');
+const reviewRoutes = require('./routes/reviewRoutes');
 
 // Initialize Express app
 const app = express();
@@ -37,6 +38,7 @@ app.use(express.json());
 app.use('/api/users', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/reviews', reviewRoutes);
 
 // Health Check
 app.get('/', (req, res) => {

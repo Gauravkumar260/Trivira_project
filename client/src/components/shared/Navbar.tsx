@@ -61,7 +61,7 @@ const Navbar: React.FC = () => {
   // --- HELPER: ACTIVE STATE LOGIC ---
   const getLinkClass = (path: string, isMobile = false) => {
     const isActive = path === '/' ? pathname === '/' : pathname.startsWith(path);
-    const baseClasses = "transition-colors duration-300 font-sans block";
+    const baseClasses = "transition-colors duration-300 font-heading block";
     const sizeClasses = isMobile ? "text-lg py-3 w-full text-left border-b border-gray-100 last:border-0" : "text-base";
     const colorClasses = isActive 
       ? "text-trivira-primary font-bold" 
@@ -71,7 +71,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-white shadow-sm font-sans w-full h-[80px] md:h-[104px] transition-all duration-300">
+    <nav className="sticky top-0 z-50 bg-white shadow-sm font-heading w-full h-[80px] md:h-[104px] transition-all duration-300">
       
       {/* Container */}
       <div className="max-w-[1440px] mx-auto px-4 md:px-6 h-full flex items-center justify-between relative bg-white z-50">
