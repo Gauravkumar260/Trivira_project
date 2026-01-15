@@ -14,6 +14,10 @@ import React from 'react';
 import Link from 'next/link';
 // import Footer from '@/components/Footer'; 
 import Testimonials from '@/components/shared/Testimonials';
+import Certifications from '@/components/home/Certifications';
+import BenefitsGrid from '@/components/home/BenefitsGrid';
+import ProductShowcase from '@/components/home/ProductShowcase';
+import Ingredients from '@/components/home/Ingredients';
 import { Button } from '@/components/ui';
 import {
   Carousel,
@@ -153,42 +157,9 @@ const slides: Slide[] = [
   }
 ];
 
-interface BenefitItem { icon: string; title: string; color: string; desc: string; btnText: string; }
-interface ProductBenefit { icon: string; text: string; }
-interface Product { id: string; title: string; desc: string; image: string; iconClass: string; iconColor: string; benefits: ProductBenefit[]; btnText: string; reverse: boolean; }
 interface IngredientBadge { label: string; icon: string; }
 
 const Home: React.FC = () => {
-  const benefitItems: BenefitItem[] = [
-    { icon: assets.icons.focus, title: "Focus", color: "text-[#da483b]", desc: "Lion's Mane Mushrooms promotes a cognitive boost and enhanced focus to help start your day.", btnText: "SHOP LION'S MANE" },
-    { icon: assets.icons.energy, title: "Energy", color: "text-[#f89920]", desc: "Cordyceps Mushrooms are ideal for an extra energy surge to boost your stamina and endurance.", btnText: "SHOP CORDYCEPS" },
-    { icon: assets.icons.calm, title: "Calm", color: "text-[#9f3691]", desc: "Reishi Mushrooms, known for their calming properties, can help you to unwind and relax.", btnText: "SHOP REISHI" },
-    { icon: assets.icons.heart, title: "Heart Health", color: "text-[#ea236f]", desc: "Spirulina is a nutrient-rich superfood known for boosting immunity, supporting heart health.", btnText: "SHOP SPIRULINA" }
-  ];
-
-  const products: Product[] = [
-    {
-      id: "protein", title: "Plant Based Protein Powder",
-      desc: "Forget about complicated process of shaking and lumps - simply put one scoop of these delicious flavors of Protein Powder into your shaker and let it work its cognitive magic.",
-      image: assets.products.protein, iconClass: "fas fa-leaf", iconColor: "text-[#086938]",
-      benefits: [ { icon: assets.icons.heartPlus, text: "Improves heart health" }, { icon: assets.icons.weight, text: "Better weight management" }, { icon: assets.icons.stomach, text: "Enhanced digestive function" } ],
-      btnText: "SHOP PROTEIN POWDER", reverse: false
-    },
-    {
-      id: "mushroom", title: "Functional mushroom",
-      desc: "Functional mushrooms are not psychedelic. Instead, they contain several medicinal compounds that strengthen gut health, immune health, and energy levels.",
-      image: assets.products.mushroom, iconClass: "fas fa-magic", iconColor: "text-orange-500",
-      benefits: [ { icon: assets.icons.heartPlus, text: "Anti-ageing properties" }, { icon: assets.icons.puzzle, text: "Stress Relief" }, { icon: assets.icons.body, text: "Boosting Immune System" } ],
-      btnText: "SHOP FUNCTIONAL MUSHROOM", reverse: true
-    },
-    {
-      id: "stevia", title: "Stevia",
-      desc: "Stevia is a natural sweetener extracted from the leaves of Stevia rebaudiana plant. Stevia is reported to be 200 to 400 times sweeter than table sugar but has zero calories.",
-      image: assets.products.stevia, iconClass: "fas fa-leaf", iconColor: "text-green-600",
-      benefits: [ { icon: assets.icons.drop, text: "Blood Sugar Regulation" }, { icon: assets.icons.weight, text: "Weight Management" }, { icon: assets.icons.metabolism, text: "Antioxidant Properties" } ],
-      btnText: "SHOP STEVIA", reverse: false
-    }
-  ];
 
   const ingredients: IngredientBadge[] = [
     { label: 'Gelatin Free', icon: assets.icons.gelatinFree },
@@ -269,143 +240,13 @@ const Home: React.FC = () => {
         <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 z-30" />
       </Carousel>
 
-      {/* ================= SECTION 2: CERTIFICATIONS ================= */}
-      {/* UPDATE: Removed fixed height, added padding and flex-wrap */}
-      <div 
-        className="bg-[#086938] w-full max-w-[1440px] mx-auto flex flex-col justify-center items-center px-4 py-12 md:px-[35px] md:h-[384px] h-auto"
-      >
-        <div className="w-full flex flex-col items-center">
-          <h3 className="font-sans font-medium text-2xl md:text-[32px] text-[#FCF2E7] text-center mb-8 md:mb-[67px] tracking-normal leading-normal">
-            Certified By
-          </h3>
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
-              {[assets.icons.iso, assets.icons.fda, assets.icons.nonGmo, assets.icons.haccp, assets.icons.gmp].map((icon, i) => (
-                <div key={i} className="flex flex-col items-center hover:scale-105 transition duration-300 ease-in-out">
-                  <img src={icon} alt="Certification Badge" className="h-16 md:h-24 lg:h-32 w-auto object-contain opacity-90 hover:opacity-100" />
-                </div>
-              ))}
-          </div>
-        </div>
-      </div>
+      <Certifications />
 
-      {/* ================= SECTION 3: BENEFITS GRID ================= */}
-      <div className="bg-[#FCF2E7] w-full flex justify-center">
-        {/* UPDATE: Reduced padding on mobile */}
-        <div className="w-full max-w-[1440px] flex flex-col items-center px-4 py-12 md:p-[52px_78px] gap-10 md:gap-[64px]">
-          
-          <header className="flex flex-col w-full max-w-[1234px] gap-4 items-center justify-center text-center">
-            <h1 className="font-sans font-bold text-[#3f8133] text-3xl md:text-[32px] leading-none tracking-[0%]">
-              What&apos;s your Benefits?
-            </h1>
-            <p className="font-rubik text-[#086938] text-lg md:text-xl leading-[26.4px] tracking-[-0.44px] max-w-[800px]">
-              Our daily superfood mushroom tablets offer unique health benefits that
-              can be seamlessly incorporated into your daily routine.
-            </p>
-          </header>
+      <BenefitsGrid />
 
-          {/* UPDATE: 1 column on mobile, 4 columns on desktop */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-[22px] w-full">
-            {benefitItems.map((item, index) => (
-              <article key={index} className="flex flex-col items-center justify-between gap-[37px] px-2 py-[31px] bg-[#fcf4ef] rounded-2xl border border-[#3f8133] shadow-[0px_2px_8px_#0000001f] hover:-translate-y-2 transition-transform duration-300 h-full">
-                <div className="flex flex-col w-full items-center justify-center gap-3">
-                  <div className="w-[100px] h-[100px] flex items-center justify-center">
-                      <img src={item.icon} alt={item.title} className="w-full h-full object-contain p-2" />
-                  </div>
-                  <h2 className={`font-sans font-medium ${item.color} text-2xl text-center tracking-[-0.44px] leading-[26.4px]`}>
-                    {item.title}
-                  </h2>
-                </div>
-                <p className="font-rubik text-[#086938] text-base text-center leading-[22.4px] w-[90%]">
-                  {item.desc}
-                </p>
-                <Link href="/products" className="w-full md:w-auto">
-                  <Button variant="outline" className={`w-full group-hover:bg-[#3f8133] group-hover:text-white`}>
-                    {item.btnText}
-                  </Button>
-                </Link>
-              </article>
-            ))}
-          </div>
-        </div>
-      </div>
+      <ProductShowcase />
 
-      {/* ================= SECTION 4: PRODUCT SHOWCASE ================= */}
-      <div className="bg-white w-full flex justify-center">
-        <div className="w-full max-w-[1440px] flex flex-col items-center px-4 py-12 md:p-[78px] gap-12 md:gap-[84px]">
-          
-          <div className="text-center w-full flex flex-col items-center gap-4">
-            <h2 className="font-sans font-bold text-[#3f8133] text-3xl md:text-4xl text-center leading-[1.2]">
-              Our Products
-            </h2>
-            <p className="font-rubik text-[#086938] text-lg md:text-[22px] text-center tracking-[-0.44px] leading-[26.4px] max-w-[800px]">
-              Experience Our other Products made for the whole family. Delicious and effective, they're crafted to support focus, energy, immunity, and overall wellness.
-            </p>
-          </div>
-
-          <div className="w-full flex flex-col gap-12 md:gap-[84px]">
-            {products.map((product) => (
-              /* UPDATE: Stacks vertically on mobile (flex-col), side-by-side on desktop */
-              <div key={product.id} className={`flex flex-col ${product.reverse ? 'md:flex-row-reverse' : 'md:flex-row'} gap-6 md:gap-[18px] items-center justify-center w-full`}>
-                
-                {/* Product Card */}
-                <div className="w-full md:w-1/2 bg-[#fcf4ef] rounded-[32px] px-6 py-8 md:px-[42px] md:py-[46px] flex flex-col justify-center gap-8 md:gap-[40px] shadow-sm h-auto md:h-[594px]">
-                  <div className="flex flex-col gap-4">
-                    <div className="flex items-center gap-4 relative">
-                        <div className="w-[50px] h-[50px] md:w-[60px] md:h-[60px] rounded-[5px] bg-white/50 flex items-center justify-center border border-[#3f8133]/20 shrink-0">
-                           <i className={`${product.iconClass} text-2xl ${product.iconColor}`}></i>
-                        </div>
-                        <h3 className="font-sans font-semibold text-[#3f8133] text-2xl md:text-[32px] leading-tight">{product.title}</h3>
-                    </div>
-                    <p className="font-rubik font-medium text-[#3f8133] text-base leading-6">{product.desc}</p>
-                  </div>
-                  <ul className="flex flex-col gap-4 md:gap-6 p-1 md:p-3">
-                    {product.benefits.map((benefit, i) => (
-                      <li key={i} className="flex items-center gap-4">
-                          <div className="w-6 h-6 md:w-7 md:h-7 flex-shrink-0"><img src={benefit.icon} alt="" className="w-full h-full object-contain"/></div>
-                          <span className="font-sans font-medium text-[#3f8133] text-base leading-6">{benefit.text}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Button className="self-start px-6 py-3 w-full md:w-auto">
-                    {product.btnText}
-                  </Button>
-                </div>
-                
-                {/* Product Image */}
-                <div className="w-full md:w-1/2 h-[300px] md:h-[594px]">
-                    <img src={product.image} alt={product.title} className="w-full h-full object-cover rounded-[32px] hover:scale-105 transition-transform duration-500 shadow-sm"/>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* ================= SECTION 5: INGREDIENTS ================= */}
-      <div 
-        className="bg-[#086938] w-full max-w-[1440px] mx-auto flex flex-col items-center justify-center px-4 py-12 md:p-[32px_104px] gap-8 md:gap-[52px]" 
-      >
-        <div className="max-w-4xl text-center flex flex-col items-center gap-8">
-          <h2 className="font-sans font-bold text-[#ffebd5] text-3xl md:text-4xl text-center leading-[1.2]">Better For You Formulation</h2>
-          <p className="font-rubik text-[#fcf4ef] text-lg md:text-[22px] text-center tracking-[-0.44px] leading-[26.4px]">
-            Made with premium mushroom extracts, our supplements are crafted for quality, taste, and effectiveness in a state-of-the-art, cGMP facility.
-          </p>
-        </div>
-        
-        {/* Ingredient Badges - Flex wrap ensures they stack nicely on mobile */}
-        <div className="flex flex-wrap lg:flex-nowrap justify-center lg:justify-between items-start gap-8 w-full max-w-[1214px]">
-          {ingredients.map((item, index) => (
-            <div key={index} className="flex flex-col items-center gap-2 group cursor-default shrink-0">
-              <div className="w-[80px] h-[80px] md:w-[100px] md:h-[100px] rounded-full bg-[#3f8133] flex items-center justify-center mb-2 relative transition-transform transform group-hover:scale-110 shadow-md">
-                 <img src={item.icon} alt={item.label} className="h-[40px] md:h-[60px] w-auto object-contain" />
-              </div>
-              <span className="font-sans font-semibold text-white text-base md:text-[20px] text-center tracking-[-0.44px] leading-[26.4px] whitespace-nowrap">
-                {item.label}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
+      <Ingredients />
 
       <Testimonials/>
 
