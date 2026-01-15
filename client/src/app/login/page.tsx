@@ -13,9 +13,24 @@ import { Input, Label, Button } from '@/components/ui';
 
 const LoginPage: React.FC = () => {
   const router = useRouter();
+  const [error, setError] = React.useState('');
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
+
+    if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+      setError('Please enter a valid email address.');
+      return;
+    }
+    if (!password || password.length < 6) {
+      setError('Password must be at least 6 characters.');
+      return;
+    }
+
+    setError('');
     // Simulate login success
     router.push('/');
   };
@@ -34,12 +49,19 @@ const LoginPage: React.FC = () => {
           </p>
         </div>
 
+        {error && (
+          <div className="p-3 text-sm text-red-500 bg-red-50 border border-red-200 rounded-lg text-center">
+            {error}
+          </div>
+        )}
+
         {/* Form */}
         <form className="flex flex-col gap-4" onSubmit={handleLogin}>
           <div className="flex flex-col gap-2">
             <Label htmlFor="email" required>Email Address</Label>
             <Input 
-              id="email" 
+              id="email"
+              name="email"
               type="email" 
               placeholder="you@example.com" 
               className="bg-gray-50 border-gray-200 focus:bg-white"
@@ -54,7 +76,8 @@ const LoginPage: React.FC = () => {
               </Link>
             </div>
             <Input 
-              id="password" 
+              id="password"
+              name="password"
               type="password" 
               placeholder="••••••••" 
               className="bg-gray-50 border-gray-200 focus:bg-white"
@@ -76,7 +99,7 @@ const LoginPage: React.FC = () => {
         {/* Footer */}
         <div className="text-center text-sm text-gray-600">
           Don&apos;t have an account?{' '}
-          <Link href="/login" className="text-trivira-primary font-bold hover:underline">
+          <Link href="/signup" className="text-trivira-primary font-bold hover:underline">
             Sign Up
           </Link>
         </div>

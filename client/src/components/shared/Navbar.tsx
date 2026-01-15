@@ -11,7 +11,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link'; 
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui';
 import {
   Sheet,
@@ -45,6 +45,7 @@ const Navbar: React.FC = () => {
   // NEW: State for Search Command Palette
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   // Toggle search with keyboard shortcut (Ctrl+K)
   useEffect(() => {
@@ -167,14 +168,14 @@ const Navbar: React.FC = () => {
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Suggestions">
-            <CommandItem onSelect={() => { setIsSearchOpen(false); window.location.href = '/products?filter=STEVIA'; }}>Stevia</CommandItem>
-            <CommandItem onSelect={() => { setIsSearchOpen(false); window.location.href = '/products?filter=FUNCTIONAL MUSHROOMS'; }}>Mushrooms</CommandItem>
-            <CommandItem onSelect={() => { setIsSearchOpen(false); window.location.href = '/products?filter=PLANT BASED PROTEIN'; }}>Protein</CommandItem>
+            <CommandItem onSelect={() => { setIsSearchOpen(false); router.push('/products?filter=STEVIA'); }}>Stevia</CommandItem>
+            <CommandItem onSelect={() => { setIsSearchOpen(false); router.push('/products?filter=FUNCTIONAL MUSHROOMS'); }}>Mushrooms</CommandItem>
+            <CommandItem onSelect={() => { setIsSearchOpen(false); router.push('/products?filter=PLANT BASED PROTEIN'); }}>Protein</CommandItem>
           </CommandGroup>
           <CommandGroup heading="Pages">
-            <CommandItem onSelect={() => { setIsSearchOpen(false); window.location.href = '/about'; }}>About Us</CommandItem>
-            <CommandItem onSelect={() => { setIsSearchOpen(false); window.location.href = '/blogs'; }}>Blogs</CommandItem>
-            <CommandItem onSelect={() => { setIsSearchOpen(false); window.location.href = '/contact'; }}>Contact</CommandItem>
+            <CommandItem onSelect={() => { setIsSearchOpen(false); router.push('/about'); }}>About Us</CommandItem>
+            <CommandItem onSelect={() => { setIsSearchOpen(false); router.push('/blogs'); }}>Blogs</CommandItem>
+            <CommandItem onSelect={() => { setIsSearchOpen(false); router.push('/contact'); }}>Contact</CommandItem>
           </CommandGroup>
         </CommandList>
       </CommandDialog>

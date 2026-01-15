@@ -13,7 +13,7 @@ export const mockProducts: Product[] = [
     price: 499,
     countInStock: 50,
     rating: 4.5,
-    numReviews: 12,
+    reviews: 12,
   },
   {
     _id: '2',
@@ -25,7 +25,7 @@ export const mockProducts: Product[] = [
     price: 399,
     countInStock: 40,
     rating: 4.8,
-    numReviews: 30,
+    reviews: 30,
   },
   {
     _id: '3',
@@ -37,7 +37,7 @@ export const mockProducts: Product[] = [
     price: 299,
     countInStock: 25,
     rating: 4.6,
-    numReviews: 10,
+    reviews: 10,
   },
 
   // PROTEIN Products
@@ -51,7 +51,7 @@ export const mockProducts: Product[] = [
     price: 1999,
     countInStock: 20,
     rating: 4.9,
-    numReviews: 45,
+    reviews: 45,
   },
   {
     _id: '5',
@@ -63,7 +63,7 @@ export const mockProducts: Product[] = [
     price: 1999,
     countInStock: 20,
     rating: 4.7,
-    numReviews: 32,
+    reviews: 32,
   },
   {
     _id: '6',
@@ -75,7 +75,7 @@ export const mockProducts: Product[] = [
     price: 1999,
     countInStock: 15,
     rating: 4.5,
-    numReviews: 8,
+    reviews: 8,
   },
 
   // MUSHROOM Products
@@ -89,7 +89,7 @@ export const mockProducts: Product[] = [
     price: 1499,
     countInStock: 10,
     rating: 4.8,
-    numReviews: 22,
+    reviews: 22,
   },
   {
     _id: '8',
@@ -101,7 +101,7 @@ export const mockProducts: Product[] = [
     price: 1499,
     countInStock: 12,
     rating: 4.9,
-    numReviews: 28,
+    reviews: 28,
   },
   {
     _id: '9',
@@ -113,6 +113,6 @@ export const mockProducts: Product[] = [
     price: 1499,
     countInStock: 18,
     rating: 4.7,
-    numReviews: 15,
+    reviews: 15,
   },
 ];

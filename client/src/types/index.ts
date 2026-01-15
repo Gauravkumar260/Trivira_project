@@ -1,13 +1,14 @@
 // types/index.ts
 
 export interface Product {
-  id: string | number;
+  id?: string | number;
   _id?: string;      // Added _id for MongoDB compatibility
   name?: string;     // Allow 'name' OR 'title' to support both data structures
   title?: string;
   subtitle?: string;
   image: string;
   bgImage?: string;  // Optional, as not all cards might have it
+  brand?: string;
   price: string | number; // Support both string and number
   rating?: number;
   reviews?: number;

@@ -10,11 +10,9 @@ import { useCartStore } from '@/stores/cartStore';
 
 const CartPage: React.FC = () => {
   const router = useRouter();
-  const { cartItems, updateQuantity, removeFromCart } = useCartStore();
+  const { cartItems, updateQuantity, removeFromCart, getSummary } = useCartStore();
 
-  const subtotal = cartItems.reduce((acc, item) => acc + (Number(item.price) * (item.qty || 1)), 0);
-  const shipping = subtotal > 999 ? 0 : 99; // Free shipping logic
-  const total = subtotal + shipping;
+  const { subtotal, shipping, total } = getSummary();
 
   if (cartItems.length === 0) {
     return (
@@ -122,7 +120,7 @@ const CartPage: React.FC = () => {
                 <Button 
                   size="lg" 
                   className="w-full text-base py-6 shadow-md"
-                  onClick={() => router.push('/')}
+                  onClick={() => router.push('/checkout')}
                 >
                   Proceed to Checkout
                 </Button>

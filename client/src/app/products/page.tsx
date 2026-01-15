@@ -3,9 +3,10 @@
 
 import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
 import ProductCard from '@/components/features/ProductCard';
 import Testimonials from '@/components/shared/Testimonials';
-import { useProductStore } from '@/stores/productStore';
+import { getProducts } from '@/services/productService';
 import { Product } from '@/types';
 
 const ProductsContent = () => {
@@ -15,11 +16,10 @@ const ProductsContent = () => {
   const [activeFilter, setActiveFilter] = useState<string>('SHOP ALL');
   const filters = ['SHOP ALL', 'STEVIA', 'PLANT BASED PROTEIN', 'FUNCTIONAL MUSHROOMS'];
 
-  const { products, loading, error, fetchProducts } = useProductStore();
-
-  useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
+  const { data: products = [], isLoading, isError } = useQuery({
+    queryKey: ['products'],
+    queryFn: getProducts,
+  });
 
   useEffect(() => {
     if (initialFilter) {
@@ -31,7 +31,11 @@ const ProductsContent = () => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   }, [activeFilter]);
 
-  if (loading) {
+  const steviaProducts = React.useMemo(() => products.filter((p) => p.category === 'Stevia'), [products]);
+  const proteinProducts = React.useMemo(() => products.filter((p) => p.category === 'Protein'), [products]);
+  const mushroomProducts = React.useMemo(() => products.filter((p) => p.category === 'Mushrooms'), [products]);
+
+  if (isLoading) {
     return (
       <div className="w-full min-h-screen flex items-center justify-center bg-white">
         <div className="text-[#3F8133] text-xl font-semibold">Loading products...</div>
@@ -39,17 +43,13 @@ const ProductsContent = () => {
     );
   }
 
-  if (error) {
+  if (isError) {
     return (
       <div className="w-full min-h-screen flex items-center justify-center bg-white">
-        <div className="text-red-500 text-xl font-semibold">{error}</div>
+        <div className="text-red-500 text-xl font-semibold">Failed to fetch products</div>
       </div>
     );
   }
-
-  const steviaProducts = products.filter((p) => p.category === 'Stevia');
-  const proteinProducts = products.filter((p) => p.category === 'Protein');
-  const mushroomProducts = products.filter((p) => p.category === 'Mushrooms');
 
   return (
     <div className="w-full min-h-screen bg-white font-sans">

@@ -7,11 +7,12 @@ interface CartState {
   addToCart: (item: Product) => void;
   removeFromCart: (id: string) => void;
   updateQuantity: (id: string, qty: number) => void;
+  getSummary: () => { subtotal: number; shipping: number; total: number };
 }
 
 export const useCartStore = create<CartState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       cartItems: [],
       addToCart: (item) =>
         set((state) => {
@@ -38,6 +39,12 @@ export const useCartStore = create<CartState>()(
             x._id === id ? { ...x, qty } : x
           ),
         })),
+      getSummary: () => {
+        const { cartItems } = get();
+        const subtotal = cartItems.reduce((acc, item) => acc + (Number(item.price) * (item.qty || 1)), 0);
+        const shipping = subtotal > 999 ? 0 : 99;
+        return { subtotal, shipping, total: subtotal + shipping };
+      },
     }),
     {
       name: 'cart-storage', // unique name

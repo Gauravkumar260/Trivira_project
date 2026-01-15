@@ -4,6 +4,7 @@
 import React from 'react';
 import { Product } from '@/types';
 import { Button } from '@/components/ui';
+import { StarRating } from '@/components/ui/StarRating';
 import { useCartStore } from '@/stores/cartStore';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
@@ -31,39 +32,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const displaySubtitle = product.subtitle || product.category || '';
   
   const borderColor = product.themeColor || '#E5E7EB';
-
-  const renderStars = () => {
-    const rating = product.rating || 0;
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 >= 0.5;
-    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
-    
-    return (
-      <div className="flex items-center gap-0.5">
-        {[...Array(fullStars)].map((_, i) => (
-          <svg key={`full-${i}`} className="w-4 h-4 md:w-5 md:h-5 fill-current text-[#3F8133]" viewBox="0 0 20 20">
-            <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
-          </svg>
-        ))}
-        {hasHalfStar && (
-          <svg className="w-4 h-4 md:w-5 md:h-5" viewBox="0 0 20 20">
-            <defs>
-              <linearGradient id={`half-star-${product._id}`}>
-                <stop offset="50%" stopColor="#3F8133"/>
-                <stop offset="50%" stopColor="#D1D5DB"/>
-              </linearGradient>
-            </defs>
-            <path fill={`url(#half-star-${product._id})`} d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
-          </svg>
-        )}
-        {[...Array(emptyStars)].map((_, i) => (
-          <svg key={`empty-${i}`} className="w-4 h-4 md:w-5 md:h-5 fill-current text-gray-300" viewBox="0 0 20 20">
-            <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
-          </svg>
-        ))}
-      </div>
-    );
-  };
 
   return (
     <div 
@@ -97,7 +65,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
 
         <div className="flex items-center justify-center gap-2 mb-1">
-          {renderStars()}
+          <StarRating rating={product.rating || 0} productId={product._id} />
           {product.reviews !== undefined && (
             <span className="text-xs text-gray-400 font-medium">
               ({product.reviews})
