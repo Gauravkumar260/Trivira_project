@@ -6,6 +6,7 @@ export { default as Label } from './Label';
 export { default as Select } from './Select';
 export { default as Checkbox } from './Checkbox';
 export { default as InfoPage } from './InfoPage';
+export { Toaster } from './sonner';
 export * from './card';
 export * from './carousel';
 export * from './command';

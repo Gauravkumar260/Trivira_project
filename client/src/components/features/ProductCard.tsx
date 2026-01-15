@@ -5,6 +5,7 @@ import React from 'react';
 import { Product } from '@/types';
 import { Button } from '@/components/ui';
 import { useCartStore } from '@/stores/cartStore';
+import { toast } from 'sonner';
 
 interface ProductCardProps {
   product: Product;
@@ -15,6 +16,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   const handleAddToCart = () => {
     addToCart(product);
+    toast.success(`${product.name || product.title} added to cart`, {
+      description: "You can view it in your cart.",
+      action: {
+        label: "View Cart",
+        onClick: () => window.location.href = '/cart',
+      },
+    });
   };
 
   const displayName = product.name || product.title || 'Product';

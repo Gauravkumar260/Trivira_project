@@ -8,6 +8,7 @@ import ScrollToTop from "@/components/shared/ScrollToTop";
 import ScrollToTopButton from "@/components/shared/ScrollToTopButton";
 import type { Metadata } from "next";
 import Providers from "./providers";
+import { Toaster } from "@/components/ui";
 
 const rubik = Rubik({ 
   subsets: ["latin"],
@@ -48,6 +49,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           </main>
           <ScrollToTopButton />
           <Footer />
+          <Toaster />
         </Providers>
       </body>
     </html>
