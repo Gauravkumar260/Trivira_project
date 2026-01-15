@@ -1,4 +1,4 @@
-// Service to handle review API calls using native fetch
+import api from '@/lib/axios';
 
 export interface Review {
   _id: string;
@@ -17,25 +17,19 @@ export interface CreateReviewData {
 }
 
 export const getReviews = async (): Promise<Review[]> => {
-  const response = await fetch('/api/reviews');
-  if (!response.ok) {
-    throw new Error('Failed to fetch reviews');
+  try {
+    const response = await api.get('/reviews');
+    return response.data;
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || 'Failed to fetch reviews');
   }
-  return response.json();
 };
 
 export const createReview = async (data: CreateReviewData): Promise<Review> => {
-  const response = await fetch('/api/reviews', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  });
-
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => ({}));
-    throw new Error(errorData.message || 'Failed to create review');
+  try {
+    const response = await api.post('/reviews', data);
+    return response.data;
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || 'Failed to create review');
   }
-  return response.json();
 };
