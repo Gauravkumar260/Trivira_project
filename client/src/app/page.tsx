@@ -28,19 +28,42 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 
+import mascotLionMane from '@/assets/images/mascots/mascot-1.svg';
+import mascotCordyceps from '@/assets/images/mascots/mascot-2.svg';
+import mascotReishi from '@/assets/images/mascots/mascot-3.svg';
+import mascotSpirulina from '@/assets/images/mascots/mascot-4.svg';
+import mascotChlorella from '@/assets/images/mascots/mascot-5.svg';
+import mascotMonkFruit from '@/assets/images/mascots/mascot-6.svg';
+import mascotStevia from '@/assets/images/mascots/mascot-7.svg';
+
+import slide1 from '@/assets/images/slides/slide-1.svg';
+import slide2 from '@/assets/images/slides/slide-2.svg';
+import slide3 from '@/assets/images/slides/slide-3.svg';
+import slide4 from '@/assets/images/slides/slide-4.svg';
+import slide5 from '@/assets/images/slides/slide-5.svg';
+import slide6 from '@/assets/images/slides/slide-6.svg';
+import slide7 from '@/assets/images/slides/slide-7.svg';
+
+import confetti from '@/assets/images/ui/confetti.svg';
+
+import partnerAmazon from '@/assets/images/partners/amazon.svg';
+import partnerFlipkart from '@/assets/images/partners/flipkart.svg';
+import partnerMeesho from '@/assets/images/partners/meesho.svg';
+import partnerIndiamart from '@/assets/images/partners/indiamart.svg';
+
 // =========================================================
 // 1. ASSET PATHS
 // =========================================================
 
 const assets = {
   mascots: {
-    lionMane: "/assets/images/mascot-lion-mane.svg",
-    cordyceps: "/assets/images/mascot-cordyceps.svg",
-    reishi: "/assets/images/mascot-reishi.svg",
-    spirulina: "/assets/images/mascot-spirulina.svg",
-    chlorella: "/assets/images/mascot-chlorella.svg",
-    monkFruit: "/assets/images/mascot-monk-fruit.svg",
-    stevia: "/assets/images/mascot-stevia.svg",
+    lionMane: mascotLionMane.src,
+    cordyceps: mascotCordyceps.src,
+    reishi: mascotReishi.src,
+    spirulina: mascotSpirulina.src,
+    chlorella: mascotChlorella.src,
+    monkFruit: mascotMonkFruit.src,
+    stevia: mascotStevia.src,
   },
   icons: {
     iso: "/assets/images/icon-iso.svg",
@@ -71,22 +94,22 @@ const assets = {
     stevia: "/assets/images/product-stevia.svg",
   },
   slides: {
-    lionMane: "/assets/images/slide-lion-mane.svg",
-    cordyceps: "/assets/images/slide-cordyceps.svg",
-    reishi: "/assets/images/slide-reishi.svg",
-    spirulina: "/assets/images/slide-spirulina.svg",
-    chlorella: "/assets/images/slide-chlorella.svg",
-    monkFruit: "/assets/images/slide-monk-fruit.svg",
-    stevia: "/assets/images/slide-stevia.svg",
+    lionMane: slide1.src,
+    cordyceps: slide2.src,
+    reishi: slide3.src,
+    spirulina: slide4.src,
+    chlorella: slide5.src,
+    monkFruit: slide6.src,
+    stevia: slide7.src,
   },
   extras: {
-    confetti: "/assets/images/confetti.svg",
+    confetti: confetti.src,
     founder: "/assets/images/founder.svg",
     partners: [
-      "/assets/images/partner-amazon.svg",   
-      "/assets/images/partner-meesho.svg",   
-      "/assets/images/partner-flipkart.svg", 
-      "/assets/images/partner-indiamart.svg"
+      partnerAmazon.src,   
+      partnerMeesho.src,   
+      partnerFlipkart.src, 
+      partnerIndiamart.src
     ]
   }
 };

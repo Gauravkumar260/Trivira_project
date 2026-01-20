@@ -3,7 +3,7 @@ client/node_modules/
 client/.next/
 client/out/
 client/dist/
-client/public/
+
 
 # server
 server/node_modules/

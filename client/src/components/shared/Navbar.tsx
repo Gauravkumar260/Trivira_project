@@ -31,13 +31,18 @@ import {
   CommandItem,
 } from "@/components/ui/command";
 
+import logo from '@/assets/images/logo.svg';
+import searchIcon from '@/assets/icons/search.svg';
+import cartIcon from '@/assets/icons/cart.svg';
+import userIcon from '@/assets/icons/user.svg';
+
 // --- ASSET CONFIGURATION ---
 const assets = {
-  logo: "/assets/images/logo.svg", 
+  logo: logo.src, 
   icons: {
-    search: "/assets/images/search.svg",
-    cart: "/assets/images/cart.svg",
-    user: "/assets/images/user.svg",
+    search: searchIcon.src,
+    cart: cartIcon.src,
+    user: userIcon.src,
   }
 };
 
