@@ -65,7 +65,7 @@ const ReviewsPage: React.FC = () => {
 
   return (
     <div className="w-full min-h-screen bg-[#FFF9F5] font-sans pb-20">
-      
+
       {/* Header */}
       <div className="bg-trivira-peach py-16 md:py-24 px-6 text-center">
         <h1 className="font-heading font-bold text-trivira-dark text-3xl md:text-5xl mb-4">
@@ -77,11 +77,11 @@ const ReviewsPage: React.FC = () => {
       </div>
 
       <div className="max-w-[1280px] mx-auto px-6 mt-12 flex flex-col lg:flex-row gap-16">
-        
+
         {/* Reviews Grid */}
         <div className="flex-1">
           <h2 className="font-heading font-bold text-2xl text-trivira-primary mb-8">What People Are Saying</h2>
-          
+
           {isLoading && (
             <div className="flex justify-center items-center h-40">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-trivira-primary"></div>
@@ -110,7 +110,7 @@ const ReviewsPage: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="font-bold text-lg text-trivira-dark">{review.title}</h3>
-                  <p className="text-gray-600 text-sm mt-1 leading-relaxed">"{review.comment}"</p>
+                  <p className="text-gray-600 text-sm mt-1 leading-relaxed">&quot;{review.comment}&quot;</p>
                 </div>
                 <div className="mt-auto pt-4 border-t border-gray-50 text-sm font-medium text-trivira-primary">
                   - {review.name}
@@ -124,27 +124,27 @@ const ReviewsPage: React.FC = () => {
         <div className="w-full lg:w-[400px] shrink-0">
           <div className="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-t-trivira-primary sticky top-28">
             <h2 className="font-heading font-bold text-2xl text-trivira-dark mb-2">Share Your Story</h2>
-            <p className="text-gray-500 text-sm mb-6">We'd love to hear about your experience.</p>
-            
+            <p className="text-gray-500 text-sm mb-6">We&apos;d love to hear about your experience.</p>
+
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
                 <Label htmlFor="name">Name</Label>
-                <Input 
-                  id="name" 
-                  placeholder="Your Name" 
-                  value={formData.name} 
+                <Input
+                  id="name"
+                  placeholder="Your Name"
+                  value={formData.name}
                   onChange={handleInputChange}
                   required
                 />
               </div>
-              
+
               <div className="flex flex-col gap-2">
                 <Label htmlFor="rating">Rating</Label>
                 <div className="flex gap-2">
                   {[1, 2, 3, 4, 5].map((star) => (
-                    <button 
-                      key={star} 
-                      type="button" 
+                    <button
+                      key={star}
+                      type="button"
                       onClick={() => setFormData(prev => ({ ...prev, rating: star }))}
                       className={`${formData.rating >= star ? 'text-[#F89920]' : 'text-gray-300'} hover:text-[#F89920] focus:outline-none transition-colors`}
                     >
@@ -158,10 +158,10 @@ const ReviewsPage: React.FC = () => {
 
               <div className="flex flex-col gap-2">
                 <Label htmlFor="title">Title</Label>
-                <Input 
-                  id="title" 
-                  placeholder="Summary of your review" 
-                  value={formData.title} 
+                <Input
+                  id="title"
+                  placeholder="Summary of your review"
+                  value={formData.title}
                   onChange={handleInputChange}
                   required
                 />
@@ -169,11 +169,11 @@ const ReviewsPage: React.FC = () => {
 
               <div className="flex flex-col gap-2">
                 <Label htmlFor="review">Review</Label>
-                <Textarea 
-                  id="review" 
-                  placeholder="Tell us what you liked..." 
-                  rows={4} 
-                  value={formData.comment} 
+                <Textarea
+                  id="review"
+                  placeholder="Tell us what you liked..."
+                  rows={4}
+                  value={formData.comment}
                   onChange={handleInputChange}
                   required
                 />

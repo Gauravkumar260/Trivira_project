@@ -2,6 +2,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { Product } from '@/types';
 import { Button } from '@/components/ui';
 import { StarRating } from '@/components/ui/StarRating';
@@ -30,20 +31,21 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   const displayName = product.name || product.title || 'Product';
   const displaySubtitle = product.subtitle || product.category || '';
-  
+
   const borderColor = product.themeColor || '#E5E7EB';
 
   return (
-    <div 
+    <div
       className="flex flex-col w-full max-w-[320px] bg-white rounded-2xl border-[1.5px] overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
       style={{ borderColor: borderColor }}
     >
-      <div className="w-full h-[220px] md:h-[260px] flex items-center justify-center p-6 bg-white">
+      <div className="w-full h-[220px] md:h-[260px] flex items-center justify-center p-6 bg-white relative">
         {product.image ? (
-          <img 
-            src={product.image} 
-            alt={displayName} 
-            className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
+          <Image
+            src={product.image}
+            alt={displayName}
+            fill
+            className="object-contain hover:scale-105 transition-transform duration-300"
           />
         ) : (
           <div className="w-36 h-36 bg-gray-50 rounded-xl flex items-center justify-center text-gray-400 text-sm">

@@ -1,10 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui';
+import storyImage from '@/assets/images/Story/story.svg';
 
 const assets = {
   extras: {
-    founder: "/assets/images/founder.svg",
+    founder: storyImage.src,
   },
 };
 

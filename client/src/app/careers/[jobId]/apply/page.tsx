@@ -17,7 +17,7 @@ interface Props {
 
 const ApplyPage = async ({ params }: Props) => {
   const { jobId } = await params;
-  
+
   // Find the specific job the user clicked on
   const currentJob = jobs.find((j) => j.id === jobId);
 
@@ -25,7 +25,7 @@ const ApplyPage = async ({ params }: Props) => {
 
   return (
     <div className="w-full font-sans bg-[#FFF9F5] min-h-screen flex flex-col items-center justify-start py-16 px-4">
-      
+
       {/* Header Section */}
       <div className="text-center mb-10">
         <h1 className="text-3xl font-semibold text-[#2F3A4B] mb-2">
@@ -47,16 +47,16 @@ const ApplyPage = async ({ params }: Props) => {
       <div className="w-full max-w-2xl">
         {/* Note: In a real app, wrap this in a Server Action or use a client component handler */}
         <form className="space-y-5">
-          
+
           {/* Row 1: Names */}
           <div className="space-y-2">
-             <Label htmlFor="firstName" required>First name:</Label>
-             <Input type="text" id="firstName" name="firstName" placeholder="First name" required />
+            <Label htmlFor="firstName" required>First name:</Label>
+            <Input type="text" id="firstName" name="firstName" placeholder="First name" required />
           </div>
 
           <div className="space-y-2">
-             <Label htmlFor="lastName" required>Last name:</Label>
-             <Input type="text" id="lastName" name="lastName" placeholder="Last name" required />
+            <Label htmlFor="lastName" required>Last name:</Label>
+            <Input type="text" id="lastName" name="lastName" placeholder="Last name" required />
           </div>
 
           {/* Row 2: Email */}
@@ -85,11 +85,11 @@ const ApplyPage = async ({ params }: Props) => {
 
           {/* Row 6: Position Select - Dynamic Integration */}
           <div className="space-y-2">
-            <Label htmlFor="position">Position You're Looking :</Label>
-            <Select 
-              id="position" 
+            <Label htmlFor="position">Position You&apos;re Looking :</Label>
+            <Select
+              id="position"
               name="position"
-              defaultValue={currentJob.title} 
+              defaultValue={currentJob.title}
             >
               {/* Dynamically map all available jobs from data */}
               {jobs.map((job) => (
@@ -112,8 +112,8 @@ const ApplyPage = async ({ params }: Props) => {
             <Label>Upload your Updated Resume :</Label>
             <div className="relative">
               <input type="file" id="resume" name="resume" className="hidden" accept=".pdf,.doc,.docx" />
-              <label 
-                htmlFor="resume" 
+              <label
+                htmlFor="resume"
                 className="flex items-center justify-center w-full bg-[#EFF2FF] hover:bg-[#E0E7FF] text-[#5A6B8C] py-4 rounded-[4px] cursor-pointer transition-colors border border-[#DAE0F2]"
               >
                 <span>Upload Resume</span>
@@ -124,8 +124,8 @@ const ApplyPage = async ({ params }: Props) => {
           </div>
 
           {/* Submit Button */}
-          <Button 
-            type="submit" 
+          <Button
+            type="submit"
             variant="primary"
             className="w-full rounded-[4px] mt-6 shadow-sm"
           >

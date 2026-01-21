@@ -14,10 +14,11 @@ export interface Product {
   reviews?: number;
   themeColor?: string;
   category?: string;
+  categoryIcon?: string; // Icon for category visualization
   description?: string;
   benefits?: { icon: string; text: string }[];
   // For the 'reverse' layout logic in product lists
-  reverse?: boolean; 
+  reverse?: boolean;
   iconClass?: string;
   iconColor?: string;
   btnText?: string;

@@ -1,12 +1,17 @@
 import Image from 'next/image';
+import certified1 from '@/assets/icons/certifications/Certified1.svg';
+import certified2 from '@/assets/icons/certifications/Certified2.svg';
+import certified3 from '@/assets/icons/certifications/Certified3.svg';
+import certified4 from '@/assets/icons/certifications/Certified4.svg';
+import certified5 from '@/assets/icons/certifications/Certified5.svg';
 
 const assets = {
   icons: {
-    iso: "/assets/images/icon-iso.svg",
-    fda: "/assets/images/icon-fda.svg",
-    nonGmo: "/assets/images/icon-non-gmo.svg",
-    haccp: "/assets/images/icon-haccp.svg",
-    gmp: "/assets/images/icon-gmp.svg",
+    iso: certified1,
+    fda: certified2,
+    nonGmo: certified3,
+    haccp: certified4,
+    gmp: certified5,
   },
 };
 
@@ -20,7 +25,7 @@ const Certifications = () => {
         <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
           {[assets.icons.iso, assets.icons.fda, assets.icons.nonGmo, assets.icons.haccp, assets.icons.gmp].map((icon, i) => (
             <div key={i} className="flex flex-col items-center hover:scale-105 transition duration-300 ease-in-out">
-              <Image src={icon} alt="Certification Badge" width={128} height={128} className="h-16 md:h-24 lg:h-32 w-auto object-contain opacity-90 hover:opacity-100" />
+              <Image src={icon.src} alt="Certification Badge" width={128} height={128} className="h-16 md:h-24 lg:h-32 w-auto object-contain opacity-90 hover:opacity-100" />
             </div>
           ))}
         </div>

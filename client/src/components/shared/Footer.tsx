@@ -10,18 +10,25 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Checkbox } from '../ui';
+import Image from 'next/image';
+import { Checkbox } from '@/components/ui';
+import logo from '@/assets/images/logo.svg';
+import shareIcon from '@/assets/icons/share.svg';
+import instagramIcon from '@/assets/icons/social/skill-icons_instagram.svg';
+import linkedinIcon from '@/assets/icons/social/skill-icons_linkedin.svg';
+import twitterIcon from '@/assets/icons/social/fa7-brands_square-x-twitter.svg';
+import whatsappIcon from '@/assets/icons/social/logos_whatsapp-icon.svg';
 
 // --- ASSET PATHS (Public Folder) ---
 const assets = {
   socials: {
-    instagram: "/assets/images/instagram.svg",
-    linkedin: "/assets/images/linkedin.svg",
-    twitter: "/assets/images/twitter.svg",
-    whatsapp: "/assets/images/whatsapp.svg",
+    instagram: instagramIcon.src,
+    linkedin: linkedinIcon.src,
+    twitter: twitterIcon.src,
+    whatsapp: whatsappIcon.src,
   },
-  logo: "/assets/images/logo.svg",
-  shareIcon: "/assets/images/share.svg",
+  logo: logo.src,
+  shareIcon: shareIcon.src,
 };
 
 const Footer: React.FC = () => {
@@ -30,7 +37,7 @@ const Footer: React.FC = () => {
   return (
     // UPDATE: Mobile Padding (py-12) vs Desktop Padding (py-[74px])
     <footer className="bg-trivira-dark w-full text-white py-12 md:py-[74px] px-5 font-heading">
-      
+
       {/* Container - Reduced gap on mobile */}
       <div className="max-w-[1280px] mx-auto flex flex-col gap-10 md:gap-14">
 
@@ -41,18 +48,18 @@ const Footer: React.FC = () => {
           <div className="flex flex-col gap-6 w-full lg:w-auto min-w-[200px] items-center lg:items-start text-center lg:text-left">
             {/* Logo */}
             <div className="w-[324px] max-w-full flex justify-center lg:justify-start">
-               {/* UPDATE: Logo slightly smaller on mobile */}
-               <img src={assets.logo} alt="Trivira Logo" className="w-40 md:w-48 h-auto object-contain" />
+              {/* UPDATE: Logo slightly smaller on mobile */}
+              <Image src={assets.logo} alt="Trivira Logo" width={160} height={64} className="w-40 md:w-48 h-auto object-contain" />
             </div>
 
             {/* Social Icons */}
             <div className="flex flex-col gap-3 items-center lg:items-start">
               <p className="font-heading font-medium text-base">Follow us on</p>
               <div className="flex gap-4 items-center">
-                 <a href="#" className="hover:scale-110 transition-transform"><img src={assets.socials.instagram} alt="Instagram" className="w-8 h-8" /></a>
-                 <a href="#" className="hover:scale-110 transition-transform"><img src={assets.socials.linkedin} alt="LinkedIn" className="w-8 h-8" /></a>
-                 <a href="#" className="hover:scale-110 transition-transform"><img src={assets.socials.twitter} alt="Twitter" className="w-8 h-8" /></a>
-                 <a href="#" className="hover:scale-110 transition-transform"><img src={assets.socials.whatsapp} alt="WhatsApp" className="w-8 h-8" /></a>
+                <a href="#" className="hover:scale-110 transition-transform"><Image src={assets.socials.instagram} alt="Instagram" width={32} height={32} className="w-8 h-8" /></a>
+                <a href="#" className="hover:scale-110 transition-transform"><Image src={assets.socials.linkedin} alt="LinkedIn" width={32} height={32} className="w-8 h-8" /></a>
+                <a href="#" className="hover:scale-110 transition-transform"><Image src={assets.socials.twitter} alt="Twitter" width={32} height={32} className="w-8 h-8" /></a>
+                <a href="#" className="hover:scale-110 transition-transform"><Image src={assets.socials.whatsapp} alt="WhatsApp" width={32} height={32} className="w-8 h-8" /></a>
               </div>
             </div>
           </div>
@@ -60,89 +67,89 @@ const Footer: React.FC = () => {
           {/* 2. Links Columns (Middle Grid) */}
           {/* UPDATE: grid-cols-2 is perfect for mobile readability */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 flex-grow w-full max-w-4xl text-left">
-              
-              {/* Home */}
-              <div className="flex flex-col gap-4">
-                <h4 className="font-heading font-semibold text-lg md:text-base text-white">Home</h4>
-                <ul className="flex flex-col gap-3">
-                  {/* UPDATE: Text is 'sm' (14px) on mobile, 'xs' (12px) on desktop */}
-                  <li><Link href="/about" className="font-medium text-sm md:text-xs hover:text-trivira-primary transition">Our Story</Link></li>
-                  <li><Link href="/blogs" className="font-medium text-sm md:text-xs hover:text-trivira-primary transition">Blogs</Link></li>
-                  <li><Link href="/careers" className="font-medium text-sm md:text-xs hover:text-trivira-primary transition">Careers</Link></li>
-                </ul>
-              </div>
 
-              {/* Shop Now */}
-              <div className="flex flex-col gap-4">
-                <h4 className="font-heading font-semibold text-lg md:text-base text-white">Shop Now</h4>
-                 <ul className="flex flex-col gap-3">
-                   <li><Link href="/products?filter=FUNCTIONAL MUSHROOMS" className="font-medium text-sm md:text-xs hover:text-trivira-primary transition">Spirulina</Link></li>
-                   <li><Link href="/products?filter=FUNCTIONAL MUSHROOMS" className="font-medium text-sm md:text-xs hover:text-trivira-primary transition">Cordyceps</Link></li>
-                   <li><Link href="/products?filter=FUNCTIONAL MUSHROOMS" className="font-medium text-sm md:text-xs hover:text-trivira-primary transition">Lion's Mane</Link></li>
-                   <li><Link href="/products?filter=FUNCTIONAL MUSHROOMS" className="font-medium text-sm md:text-xs hover:text-trivira-primary transition">Reishi</Link></li>
-                   <li><Link href="/products?filter=STEVIA" className="font-medium text-sm md:text-xs hover:text-trivira-primary transition">Stevia</Link></li>
-                  </ul>
-              </div>
+            {/* Home */}
+            <div className="flex flex-col gap-4">
+              <h4 className="font-heading font-semibold text-lg md:text-base text-white">Home</h4>
+              <ul className="flex flex-col gap-3">
+                {/* UPDATE: Text is 'sm' (14px) on mobile, 'xs' (12px) on desktop */}
+                <li><Link href="/about" className="font-medium text-sm md:text-xs hover:text-trivira-primary transition">Our Story</Link></li>
+                <li><Link href="/blogs" className="font-medium text-sm md:text-xs hover:text-trivira-primary transition">Blogs</Link></li>
+                <li><Link href="/careers" className="font-medium text-sm md:text-xs hover:text-trivira-primary transition">Careers</Link></li>
+              </ul>
+            </div>
 
-              {/* Help */}
-              <div className="flex flex-col gap-4">
-                <h4 className="font-heading font-semibold text-lg md:text-base text-white">Help</h4>
-                <ul className="flex flex-col gap-3">
-                  <li><Link href="/refund" className="font-medium text-sm md:text-xs hover:text-trivira-primary transition">Refund Policy</Link></li>
-                  <li><Link href="/shipping" className="font-medium text-sm md:text-xs hover:text-trivira-primary transition">Shipping Policy</Link></li>
-                  <li><Link href="/contact" className="font-medium text-sm md:text-xs hover:text-trivira-primary transition">Contact Us</Link></li>
-                </ul>
-              </div>
+            {/* Shop Now */}
+            <div className="flex flex-col gap-4">
+              <h4 className="font-heading font-semibold text-lg md:text-base text-white">Shop Now</h4>
+              <ul className="flex flex-col gap-3">
+                <li><Link href="/products?filter=FUNCTIONAL MUSHROOMS" className="font-medium text-sm md:text-xs hover:text-trivira-primary transition">Spirulina</Link></li>
+                <li><Link href="/products?filter=FUNCTIONAL MUSHROOMS" className="font-medium text-sm md:text-xs hover:text-trivira-primary transition">Cordyceps</Link></li>
+                <li><Link href="/products?filter=FUNCTIONAL MUSHROOMS" className="font-medium text-sm md:text-xs hover:text-trivira-primary transition">Lion&apos;s Mane</Link></li>
+                <li><Link href="/products?filter=FUNCTIONAL MUSHROOMS" className="font-medium text-sm md:text-xs hover:text-trivira-primary transition">Reishi</Link></li>
+                <li><Link href="/products?filter=STEVIA" className="font-medium text-sm md:text-xs hover:text-trivira-primary transition">Stevia</Link></li>
+              </ul>
+            </div>
 
-              {/* Legal */}
-              <div className="flex flex-col gap-4">
-                <h4 className="font-heading font-semibold text-lg md:text-base text-white">Legal</h4>
-                <ul className="flex flex-col gap-3">
-                  <li><Link href="/accessibility" className="font-medium text-sm md:text-xs hover:text-trivira-primary transition">Accessibility</Link></li>
-                  <li><Link href="/privacy" className="font-medium text-sm md:text-xs hover:text-trivira-primary transition">Privacy Policy</Link></li>
-                  <li><Link href="/terms" className="font-medium text-sm md:text-xs hover:text-trivira-primary transition">Terms of Service</Link></li>
-                </ul>
-              </div>
+            {/* Help */}
+            <div className="flex flex-col gap-4">
+              <h4 className="font-heading font-semibold text-lg md:text-base text-white">Help</h4>
+              <ul className="flex flex-col gap-3">
+                <li><Link href="/refund" className="font-medium text-sm md:text-xs hover:text-trivira-primary transition">Refund Policy</Link></li>
+                <li><Link href="/shipping" className="font-medium text-sm md:text-xs hover:text-trivira-primary transition">Shipping Policy</Link></li>
+                <li><Link href="/contact" className="font-medium text-sm md:text-xs hover:text-trivira-primary transition">Contact Us</Link></li>
+              </ul>
+            </div>
+
+            {/* Legal */}
+            <div className="flex flex-col gap-4">
+              <h4 className="font-heading font-semibold text-lg md:text-base text-white">Legal</h4>
+              <ul className="flex flex-col gap-3">
+                <li><Link href="/accessibility" className="font-medium text-sm md:text-xs hover:text-trivira-primary transition">Accessibility</Link></li>
+                <li><Link href="/privacy" className="font-medium text-sm md:text-xs hover:text-trivira-primary transition">Privacy Policy</Link></li>
+                <li><Link href="/terms" className="font-medium text-sm md:text-xs hover:text-trivira-primary transition">Terms of Service</Link></li>
+              </ul>
+            </div>
 
           </div>
 
           {/* 3. Newsletter Section (Right Column) */}
           <div className="flex flex-col gap-4 w-full lg:w-[312px]">
-              <h4 className="font-heading font-medium text-lg text-white">Subscribe to our Newsletter</h4>
-              
-              {/* Input Box - Exact Figma Style */}
-              <form className="relative w-full h-[40px] bg-white rounded-[6px] flex items-center shadow-sm group focus-within:ring-2 ring-trivira-primary/50 transition-all">
-                <input 
-                  type="email" 
-                  placeholder="Enter Your Email" 
-                  className="w-full h-full px-4 text-gray-600 text-sm outline-none bg-transparent rounded-[6px]"
-                />
-                <button className="absolute right-0 top-0 h-full w-[40px] bg-trivira-primary flex items-center justify-center rounded-r-[6px] hover:bg-green-700 transition">
-                  <img src={assets.shareIcon} alt="Subscribe" className="w-3 h-auto object-contain brightness-0 invert" />
-                </button>
-              </form>
+            <h4 className="font-heading font-medium text-lg text-white">Subscribe to our Newsletter</h4>
 
-              {/* Checkbox */}
-              <div className="flex items-start gap-2 group cursor-pointer">
-                <div className="relative flex items-center pt-1">
-                   <Checkbox 
-                     id="newsletter_agree" 
-                     variant="dark"
-                   />
-                </div>
-                <label htmlFor="newsletter_agree" className="font-heading font-normal text-xs text-gray-300 leading-[18px] cursor-pointer hover:text-white transition-colors select-none">
-                  I agree to receive marketing emails from Trivira. You can unsubscribe from these emails at any time.
-                </label>
+            {/* Input Box - Exact Figma Style */}
+            <form className="relative w-full h-[40px] bg-white rounded-[6px] flex items-center shadow-sm group focus-within:ring-2 ring-trivira-primary/50 transition-all">
+              <input
+                type="email"
+                placeholder="Enter Your Email"
+                className="w-full h-full px-4 text-gray-600 text-sm outline-none bg-transparent rounded-[6px]"
+              />
+              <button className="absolute right-0 top-0 h-full w-[40px] bg-trivira-primary flex items-center justify-center rounded-r-[6px] hover:bg-green-700 transition">
+                <Image src={assets.shareIcon} alt="Subscribe" width={12} height={12} className="w-3 h-auto object-contain brightness-0 invert" />
+              </button>
+            </form>
+
+            {/* Checkbox */}
+            <div className="flex items-start gap-2 group cursor-pointer">
+              <div className="relative flex items-center pt-1">
+                <Checkbox
+                  id="newsletter_agree"
+                  variant="dark"
+                />
               </div>
+              <label htmlFor="newsletter_agree" className="font-heading font-normal text-xs text-gray-300 leading-[18px] cursor-pointer hover:text-white transition-colors select-none">
+                I agree to receive marketing emails from Trivira. You can unsubscribe from these emails at any time.
+              </label>
+            </div>
           </div>
 
         </div>
 
         {/* --- Bottom Copyright --- */}
         <div className="flex justify-center items-center border-t border-white/10 pt-6">
-           <p className="font-heading font-normal text-sm text-gray-300 text-center">
-             Trivira Global Enterprise ©{currentYear}. Registered as Trivira Nutraceuticals Pvt. Ltd.
-           </p>
+          <p className="font-heading font-normal text-sm text-gray-300 text-center">
+            Trivira Global Enterprise ©{currentYear}. Registered as Trivira Nutraceuticals Pvt. Ltd.
+          </p>
         </div>
 
       </div>

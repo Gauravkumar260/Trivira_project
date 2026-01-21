@@ -10,7 +10,8 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link'; 
+import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui';
 import {
@@ -31,14 +32,14 @@ import {
   CommandItem,
 } from "@/components/ui/command";
 
-import logo from '@/assets/images/logo.svg';
+import logo from '@/assets/images/Logo 2.svg';
 import searchIcon from '@/assets/icons/search.svg';
 import cartIcon from '@/assets/icons/cart.svg';
 import userIcon from '@/assets/icons/user.svg';
 
 // --- ASSET CONFIGURATION ---
 const assets = {
-  logo: logo.src, 
+  logo: logo.src,
   icons: {
     search: searchIcon.src,
     cart: cartIcon.src,
@@ -69,8 +70,8 @@ const Navbar: React.FC = () => {
     const isActive = path === '/' ? pathname === '/' : pathname.startsWith(path);
     const baseClasses = "transition-colors duration-300 font-heading block";
     const sizeClasses = isMobile ? "text-lg py-3 w-full text-left border-b border-gray-100 last:border-0" : "text-base";
-    const colorClasses = isActive 
-      ? "text-trivira-primary font-bold" 
+    const colorClasses = isActive
+      ? "text-trivira-primary font-bold"
       : "text-[#969494] font-medium hover:text-trivira-primary";
 
     return `${baseClasses} ${sizeClasses} ${colorClasses}`;
@@ -78,14 +79,14 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className="sticky top-0 z-50 bg-white shadow-sm font-heading w-full h-[80px] md:h-[104px] transition-all duration-300">
-      
+
       {/* Container */}
       <div className="max-w-[1440px] mx-auto px-4 md:px-6 h-full flex items-center justify-between relative bg-white z-50">
-          
+
         {/* --- 1. LOGO --- */}
         <div className="flex-shrink-0 flex items-center">
           <Link href="/" className="flex items-center gap-2">
-            <img src={assets.logo} alt="Trivira Logo" className="h-10 md:h-16 w-auto object-contain" />
+            <Image src={assets.logo} alt="Trivira Logo" width={200} height={64} className="h-10 md:h-16 w-auto object-contain" />
           </Link>
         </div>
 
@@ -100,35 +101,35 @@ const Navbar: React.FC = () => {
           {/* Action Icons */}
           <div className="flex items-center gap-6 ml-4 border-l border-gray-100 pl-6">
             {/* DESKTOP SEARCH BUTTON */}
-            <button 
+            <button
               onClick={() => setIsSearchOpen(true)}
               className="hover:scale-110 transition duration-300 focus:outline-none"
             >
-              <img src={assets.icons.search} alt="Search" className="w-6 h-6" />
+              <Image src={assets.icons.search} alt="Search" width={24} height={24} className="w-6 h-6" />
             </button>
-            
+
             <Link href="/cart" className="hover:scale-110 transition duration-300 relative">
-              <img src={assets.icons.cart} alt="Cart" className="w-6 h-6" />
+              <Image src={assets.icons.cart} alt="Cart" width={24} height={24} className="w-6 h-6" />
             </Link>
             <Link href="/login" className="hover:scale-110 transition duration-300">
-              <img src={assets.icons.user} alt="User" className="w-6 h-6" />
+              <Image src={assets.icons.user} alt="User" width={24} height={24} className="w-6 h-6" />
             </Link>
           </div>
         </div>
 
         {/* --- 3. MOBILE CONTROLS --- */}
         <div className="md:hidden flex items-center gap-5">
-          
+
           {/* MOBILE SEARCH BUTTON */}
-          <button 
+          <button
             onClick={() => setIsSearchOpen(true)}
             className="hover:opacity-80 transition focus:outline-none"
           >
-             <img src={assets.icons.search} alt="Search" className="w-6 h-6" />
+            <Image src={assets.icons.search} alt="Search" width={24} height={24} className="w-6 h-6" />
           </button>
 
           <Link href="/cart" className="hover:opacity-80 transition">
-              <img src={assets.icons.cart} alt="Cart" className="w-6 h-6" />
+            <Image src={assets.icons.cart} alt="Cart" width={24} height={24} className="w-6 h-6" />
           </Link>
 
           {/* Hamburger / Sheet Trigger */}
@@ -145,7 +146,7 @@ const Navbar: React.FC = () => {
                 <SheetTitle className="text-trivira-primary font-bold text-2xl">Menu</SheetTitle>
                 <SheetDescription>Explore Trivira Wellness</SheetDescription>
               </SheetHeader>
-              
+
               <div className="flex-1 flex flex-col gap-2 overflow-y-auto">
                 <SheetClose asChild><Link href="/" className={getLinkClass('/', true)}>Home</Link></SheetClose>
                 <SheetClose asChild><Link href="/products" className={getLinkClass('/products', true)}>Nutraceuticals Product</Link></SheetClose>
@@ -155,12 +156,12 @@ const Navbar: React.FC = () => {
               </div>
 
               <div className="mt-auto pt-6 border-t border-gray-100">
-                 <SheetClose asChild>
-                   <Link href="/login" className="flex items-center gap-3 text-[#3F8133] hover:opacity-80 font-bold p-3 bg-[#FCF2E7] rounded-lg justify-center">
-                     <img src={assets.icons.user} className="w-5 h-5"/> 
-                     <span className="uppercase tracking-wide text-sm">Login / Sign Up</span>
-                   </Link>
-                 </SheetClose>
+                <SheetClose asChild>
+                  <Link href="/login" className="flex items-center gap-3 text-[#3F8133] hover:opacity-80 font-bold p-3 bg-[#FCF2E7] rounded-lg justify-center">
+                    <Image src={assets.icons.user} alt="Login" width={20} height={20} className="w-5 h-5" />
+                    <span className="uppercase tracking-wide text-sm">Login / Sign Up</span>
+                  </Link>
+                </SheetClose>
               </div>
             </SheetContent>
           </Sheet>

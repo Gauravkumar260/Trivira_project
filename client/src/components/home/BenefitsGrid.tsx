@@ -1,13 +1,17 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui';
+import benefits1 from '@/assets/icons/benefits/benefits1.svg';
+import benefits2 from '@/assets/icons/benefits/benefits2.svg';
+import benefits3 from '@/assets/icons/benefits/benefits3.svg';
+import benefits4 from '@/assets/icons/benefits/benefits4.svg';
 
 const assets = {
   icons: {
-    focus: "/assets/images/icon-focus.svg",
-    energy: "/assets/images/icon-energy.svg",
-    calm: "/assets/images/icon-calm.svg",
-    heart: "/assets/images/icon-heart.svg",
+    focus: benefits1,
+    energy: benefits2,
+    calm: benefits3,
+    heart: benefits4,
   },
 };
 

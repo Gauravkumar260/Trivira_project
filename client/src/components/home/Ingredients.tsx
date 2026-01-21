@@ -1,12 +1,17 @@
 import Image from 'next/image';
+import better1 from '@/assets/icons/Better/Better1.svg';
+import better2 from '@/assets/icons/Better/Better2.svg';
+import better3 from '@/assets/icons/Better/Better3.svg';
+import better4 from '@/assets/icons/Better/Better4.svg';
+import better5 from '@/assets/icons/Better/Better5.svg';
 
 const assets = {
   icons: {
-    gelatinFree: "/assets/images/badge-gelatin-free.svg",
-    glutenFree: "/assets/images/badge-gluten-free.svg",
-    nonGmoBadge: "/assets/images/badge-non-gmo.svg",
-    soyFree: "/assets/images/badge-soy-free.svg",
-    vegan: "/assets/images/badge-vegan.svg",
+    gelatinFree: better1.src,
+    glutenFree: better2.src,
+    nonGmoBadge: better3.src,
+    soyFree: better4.src,
+    vegan: better5.src,
   },
 };
 

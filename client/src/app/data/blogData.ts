@@ -1,9 +1,16 @@
+import product4 from '@/assets/images/blog/Rectangle 37.svg';
+import product7 from '@/assets/images/blog/Rectangle 35.svg';
+import product1 from '@/assets/images/blog/Rectangle 36.svg';
+import product6 from '@/assets/images/blog/Blogs.svg';
+
+
 export interface BlogPost {
   id: string; // Slug for the URL (e.g., 'functional-mushrooms')
   title: string;
   subtitle: string;
   desc: string;
   image: string;
+  heroImage?: string; // Optional image specifically for the Hero section
   readTime: string;
   date: string;
   content: string; // HTML content for the article
@@ -11,9 +18,10 @@ export interface BlogPost {
 
 const assets = {
   blogs: {
-    functionalMushrooms: "/assets/images/functional-mushrooms.svg",
-    stevia: "/assets/images/stevia.svg",
-    plantBasedProtein: "/assets/images/plant-based-protein.svg",
+    functionalMushroomsCard: product7.src, // Rectangle 37 (Card)
+    functionalMushroomsHero: product6.src, // Rectangle 35 (Hero)
+    stevia: product1.src,
+    plantBasedProtein: product4.src,
   }
 };
 
@@ -23,7 +31,8 @@ export const blogPosts: BlogPost[] = [
     title: "Functional Mushrooms",
     subtitle: "Ancient Wisdom for Modern Health",
     desc: "Discover how Reishi, Lion’s Mane and Cordyceps harness ancient wisdom to boost immunity, energy, and focus.",
-    image: assets.blogs.functionalMushrooms, 
+    image: assets.blogs.functionalMushroomsCard,
+    heroImage: assets.blogs.functionalMushroomsHero,
     readTime: "6 min read",
     date: "Oct 12, 2024",
     content: `
@@ -45,7 +54,7 @@ export const blogPosts: BlogPost[] = [
     title: "Stevia",
     subtitle: "The Natural Sweetness Revolution",
     desc: "A zero-calorie, plant-based alternative to sugar that supports weight management and is safe for diabetics.",
-    image: assets.blogs.stevia, 
+    image: assets.blogs.stevia,
     readTime: "4 min read",
     date: "Oct 15, 2024",
     content: `
@@ -60,7 +69,7 @@ export const blogPosts: BlogPost[] = [
     title: "Plant-Based Protein",
     subtitle: "Fuel Your Body Cleanly",
     desc: "Clean, delicious, and packed with amino acids — supporting muscle recovery, energy, and overall wellness.",
-    image: assets.blogs.plantBasedProtein, 
+    image: assets.blogs.plantBasedProtein,
     readTime: "6 min read",
     date: "Oct 20, 2024",
     content: `
